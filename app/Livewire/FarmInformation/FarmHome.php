@@ -2,6 +2,7 @@
 
 namespace App\Livewire\FarmInformation;
 
+use App\Models\Farm;
 use Livewire\Component;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
@@ -16,12 +17,21 @@ class FarmHome extends Component
     public $search ;
 
     public $headers;
+
+    public bool $delModal = false;
     public function mount()
     { 
         $this->headers = [
             ['key' => 'id', 'label' => '#', 'class' => 'text-neutral'],
             ['key' => 'farm_name', 'label' => 'Farm', 'class' => 'text-neutral'],
         ];
+    }
+    public function remove(string $id)
+    {
+        $farm = Farm::findOrfail(decrypt($id));
+        $farm->update(['active_status' => 0]);
+        session()->flash('sucesss', 'Farm of '.$farm->farm_name.' Successfully Deleted');
+        $this->redirect(route('farm.information.farm'));
     }
     public function updated()
     {
