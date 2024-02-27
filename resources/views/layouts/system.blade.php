@@ -75,7 +75,7 @@
               <span>© <span id="year"></span>, {{env('SYSTEM_NAME', 'Brookside Group of Companies')}}. All rights reserved</span>
             </div>
         </div> --}}
-        <footer class="footer footer-center p-4 bg-base-300 text-base-content">
+        <footer class="flex justify-end text-sm p-4 text-gray-400">
             <aside>
                 <p>© <span id="year"></span>, {{env('SYSTEM_NAME', 'Brookside Group of Companies')}}. All rights reserved</p>
             </aside>

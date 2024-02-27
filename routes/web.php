@@ -6,8 +6,10 @@ use Illuminate\Support\Facades\Route;
 use App\Services\GenericServices as GS;
 use App\Http\Controllers\LoginController;
 use App\Utilities\GenericUtilities as GU;
+use App\Livewire\FarmInformation\FarmEdit;
 use App\Livewire\FarmInformation\FarmHome;
 use App\Http\Controllers\FarmInfoController;
+use App\Livewire\FarmInformation\FarmCreate;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthenticationController;
 
@@ -25,11 +27,11 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 	Route::prefix('/farm-information')->name('farm.information.')->group(function(){
 		Route::get('/', [FarmInfoController::class, 'index'])->name('home');
 		Route::get('/farm', FarmHome::class)->name('farm');
-		// Route::get('/farm/create', FarmCreate::class)->name('farm.create');
+		Route::get('/farm/create', FarmCreate::class)->name('farm.create');
 		// Route::get('/location', FarmLocationHome::class)->name('location');
 		// Route::get('/location/create', FarmLocationCreate::class)->name('location.create');
 
-		// Route::get('/farm/{id}/edit', FarmEdit::class)->name('farm.edit');
+		Route::get('/farm/{id}/edit', FarmEdit::class)->name('farm.edit');
 		// Route::get('/farm/location/{id}/edit', FarmLocationEdit::class)->name('location.edit');
 	});
 	/**

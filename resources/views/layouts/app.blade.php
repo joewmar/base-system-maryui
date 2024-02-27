@@ -17,6 +17,11 @@
     @yield('scripts')
   </head>
   <body class="font-sans antialiased">
+    @if (session()->has('success'))
+      <x-alert title="{{session('success')}}" icon="o-check-circle" class="alert-success" />
+    @elseif (session()->has('error'))
+      <x-alert title="{{session('error')}}" icon="c-x-circle" class="alert-error" />
+    @endif
     {{-- @auth('web') --}}
       @extends('layouts.system')
     {{-- @else
