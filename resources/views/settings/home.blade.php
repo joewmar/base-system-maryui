@@ -15,7 +15,7 @@
                         <p class="p-2">Manage Student Account</p>
                     </div>
                 </a>
-                <a href="" class="p-8 items-center rounded-lg text-center shadow-xl hover:bg-slate-300   hover:text-gray-700">
+                <a href="{{route('settings.activitylog.home')}}" class="p-8 items-center rounded-lg text-center shadow-xl hover:bg-slate-300   hover:text-gray-700">
                     <x-icon name="m-clipboard" class="w-20 h-20 " />
                     <div class="items-center text-center">
                         <h2 class="p-2 font-medium">Activity Log</h2>

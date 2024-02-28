@@ -11,16 +11,23 @@
     {{-- Styles --}}
     @yield('styles')
     @livewireStyles
-      @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     {{-- Scripts --}}
-    @yield('scripts')
   </head>
   <body class="font-sans antialiased">
     @if (session()->has('success'))
-      <x-alert title="{{session('success')}}" icon="o-check-circle" class="alert-success" />
+      <x-alert id="alertbox" title="{{session('success')}}" icon="o-check-circle" class="alert-success" >
+          <x-slot:actions>
+              <x-button icon="c-x-mark" class="btn-circle btn-ghost" onclick="closeAlert()" />
+          </x-slot:actions>
+      </x-alert>
     @elseif (session()->has('error'))
-      <x-alert title="{{session('error')}}" icon="c-x-circle" class="alert-error" />
+      <x-alert id="alertbox" title="{{session('error')}}" icon="c-x-circle" class="alert-error" >
+          <x-slot:actions>
+            <x-button icon="c-x-mark" class="btn-circle btn-ghost" onclick="closeAlert()" />
+          </x-slot:actions>
+      </x-alert>
     @endif
     {{-- @auth('web') --}}
       @extends('layouts.system')
@@ -28,5 +35,13 @@
       @yield('content')
     @endauth     --}}
     @livewireScripts
+    @yield('scripts')
+
+    <script>
+       function closeAlert(){
+          var alertbox = document.getElementById('alertbox');
+          alertbox.remove();
+       }
+    </script>
   </body>
 </html>

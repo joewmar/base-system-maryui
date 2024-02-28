@@ -33,7 +33,7 @@ class FarmHome extends Component
         session()->flash('sucesss', 'Farm of '.$farm->farm_name.' Successfully Deleted');
         $this->redirect(route('farm.information.farm'));
     }
-    public function updated()
+    public function updatingSearch()
     {
         $this->resetPage();
     }

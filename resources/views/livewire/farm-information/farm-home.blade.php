@@ -1,7 +1,7 @@
 @section('title') Farm @endsection
 
 
-{{-- <div class="pt-12 w-full h-full flex flex-col space-y-10 justify-center">
+<div class="pt-12 w-full h-full flex flex-col space-y-10 justify-center">
     <x-button icon="o-arrow-left" class="btn-circle btn-ghost" link="{{route('farm.information.home')}}"  />
     <div class="p-4 text-center font-bold text-3xl">
         <h3>Farm</h3>
@@ -32,5 +32,5 @@
             @endscope
         </x-table>
     </div>  
-</div> --}}
-<x-process-dialog />
+</div>
+{{-- <x-process-dialog /> --}}
