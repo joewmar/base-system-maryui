@@ -12,8 +12,8 @@
     @yield('styles')
     @livewireStyles
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
     {{-- Scripts --}}
+    {{-- <script type="module" src="{{Vite::asset('resources/js/alert.js')}}"></script> --}}
   </head>
   <body class="font-sans antialiased">
     @if (session()->has('success'))
@@ -34,14 +34,10 @@
     {{-- @else
       @yield('content')
     @endauth     --}}
+    @include('sweetalert::alert')
+
     @livewireScripts
     @yield('scripts')
 
-    <script>
-       function closeAlert(){
-          var alertbox = document.getElementById('alertbox');
-          alertbox.remove();
-       }
-    </script>
   </body>
 </html>

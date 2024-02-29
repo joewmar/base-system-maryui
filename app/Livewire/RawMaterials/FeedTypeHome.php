@@ -1,0 +1,35 @@
+<?php
+
+namespace App\Livewire\RawMaterials;
+
+use App\Models\FeedType;
+use Livewire\Component;
+use Illuminate\Support\Facades\DB;
+
+class FeedTypeHome extends Component
+{
+
+    public $headers;
+    public $feedTypes;
+    public function mount()
+    {
+        $this->feedTypes = DB::table('feed_types')->where('active_status', 1)->get();
+        $this->headers = [
+            ['key' => 'id', 'label' => '#', 'class' => 'text-neutral'],
+            ['key' => 'feed_type_name', 'label' => 'Feed Type', 'class' => 'text-neutral'],
+        ];
+    }
+
+    public function remove(string $id)
+    {
+        $feedTypes = FeedType::findOrfail(decrypt($id));
+        $feedTypes->active_status = 0;
+        $feedTypes->save();
+        session()->flash('success', ' Feed Type '.$feedTypes->feed_type_name.' Successfully Deleted');
+        $this->redirect(route('raw-materials.feed-type-home'));
+    }
+    public function render()
+    {
+        return view('livewire.raw-materials.feed-type-home');
+    }
+}

@@ -11,15 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('raw_materials', function (Blueprint $table) {
+        Schema::create('feed_types', function (Blueprint $table) {
             $table->id();
-            $table->string('material_name');
-            $table->double('price_per_kg');
-            $table->double('inventory_cost');
-            $table->float('kgs_per_bag');
-            $table->integer('standard_day');
-            $table->tinyText('category');
-            $table->tinyText('type');
+            $table->string('feed_type_name');
             $table->boolean('active_status')->default(1);
             $table->timestamps();
         });
@@ -30,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('raw_materials');
+        Schema::dropIfExists('feed_types');
     }
 };
