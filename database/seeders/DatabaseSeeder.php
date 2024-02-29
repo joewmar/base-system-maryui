@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\Farm;
+use App\Models\FeedType;
+use App\Models\RawMaterialItem;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -25,5 +27,7 @@ class DatabaseSeeder extends Seeder
         // ]);
         Farm::factory(10)->create();
         User::factory(10)->create();
+        RawMaterialItem::factory(10)->create();
+        FeedType::factory(10)->create();
     }
 }

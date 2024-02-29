@@ -16,7 +16,9 @@ use App\Http\Controllers\FarmInfoController;
 use App\Livewire\FarmInformation\FarmCreate;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthenticationController;
+use App\Livewire\RawMaterials\FeedTypeHome;
 use App\Livewire\Settings\ActivitylogHome;
+use App\Models\FeedType;
 
 // Fixed Route for all new application that will use Auth
 Route::get('/app-login/{id}', [AuthenticationController::class, 'app_login'])->name('app.login');
@@ -47,6 +49,13 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 		Route::get('/accounts/{id}/edit', AccountsEdit::class)->name('accounts.edit');
 		//Activity Log
 		Route::get('/activity-log', ActivitylogHome::class)->name('activitylog.home');
+	});
+	Route::prefix('/raw-materials')->name('raw-materials.')->group(function(){
+		// Raw-Materials
+
+		// For Feed Type
+		route::get('/feed-type', FeedTypeHome::class)->name('feed-type-home');
+
 	});
 	
 	/**
