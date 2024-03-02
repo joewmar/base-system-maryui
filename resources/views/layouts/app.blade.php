@@ -16,28 +16,35 @@
     {{-- <script type="module" src="{{Vite::asset('resources/js/alert.js')}}"></script> --}}
   </head>
   <body class="font-sans antialiased">
-    @if (session()->has('success'))
-      <x-alert id="alertbox" title="{{session('success')}}" icon="o-check-circle" class="alert-success" >
-          <x-slot:actions>
-              <x-button icon="c-x-mark" class="btn-circle btn-ghost" onclick="closeAlert()" />
-          </x-slot:actions>
-      </x-alert>
-    @elseif (session()->has('error'))
-      <x-alert id="alertbox" title="{{session('error')}}" icon="c-x-circle" class="alert-error" >
-          <x-slot:actions>
-            <x-button icon="c-x-mark" class="btn-circle btn-ghost" onclick="closeAlert()" />
-          </x-slot:actions>
-      </x-alert>
-    @endif
     {{-- @auth('web') --}}
       @extends('layouts.system')
     {{-- @else
       @yield('content')
     @endauth     --}}
-    @include('sweetalert::alert')
 
-    @livewireScripts
+    {{-- Alerts  --}}
+    @if (session()->has('success'))
+      <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+              title: "Success!",
+              text: "{{session('success')}}",
+              icon: "success"
+            });
+        });
+      </script>
+    @elseif (session()->has('error'))
+      <script>
+        window.addEventListener('DOMContentLoaded', function () {
+            Swal.fire({
+              title: "Something went wrong!",
+              text: "{{session('error')}}",
+              icon: "error",
+            });
+        });
+      </script>
+    @endif
     @yield('scripts')
-
+    @livewireScripts
   </body>
 </html>

@@ -2,9 +2,11 @@
 
 namespace App\Livewire\RawMaterials;
 
-use App\Models\FeedType;
 use Livewire\Component;
+use App\Models\FeedType;
+use Livewire\Attributes\On;
 use Illuminate\Support\Facades\DB;
+
 
 class FeedTypeHome extends Component
 {
@@ -20,6 +22,15 @@ class FeedTypeHome extends Component
         ];
     }
 
+    public function add()
+    {
+        // $this->dispatch('success', ['message' => 'Record Added']);
+
+        session()->flash('error', 'Record Error Saved');
+        $this->redirect(route('raw-materials.feed-type-home'));
+
+    }
+    #[On('remove')] 
     public function remove(string $id)
     {
         $feedTypes = FeedType::findOrfail(decrypt($id));
@@ -30,6 +41,7 @@ class FeedTypeHome extends Component
     }
     public function render()
     {
+
         return view('livewire.raw-materials.feed-type-home');
     }
 }
