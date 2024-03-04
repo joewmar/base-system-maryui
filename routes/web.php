@@ -29,7 +29,7 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 	// Main Session Check for Authetication
 	Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 	// Dash/Dashboard
-	Route::get('/', [DashboardController::class, 'dash'])->name('dash');
+	Route::get('/', Dashboard::class)->name('home');
 
 	Route::prefix('/farm-information')->name('farm.information.')->group(function(){
 		Route::get('/', [FarmInfoController::class, 'index'])->name('home');
