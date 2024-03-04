@@ -69,7 +69,7 @@ class Sidebar extends Component
                 ),
             ],
             [
-                "name" => "reports",
+                "name" => "Reports",
                 "sub" =>  array(
                     ["name" => "Accounting Bills", "link" => ""],
                     ["name"=> "Pivot logs", "link"=> ""],
