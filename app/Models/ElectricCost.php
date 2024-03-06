@@ -9,6 +9,7 @@ class ElectricCost extends Model
 {
     use HasFactory;
         protected $fillable = [
+            'date',
             'electric_cost', 
             'created_at',
             'active_status'

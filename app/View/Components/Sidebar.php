@@ -42,12 +42,17 @@ class Sidebar extends Component
                 ),
             ],
             [
+                "name" => "Forecasting",
+                "sub" =>  array(
+                    ["name" => "Monitoring Inventory Levels", "link" => ""],
+                ),
+            ],
+            [
                 "name" => "Production Management",
                 "sub" => array (
                     ["name"=> "Premixes","link"=> ""],
                     ["name"=> "Production Order", "link"=> ""],
                     ["name"=> "Feed Information", "link"=> ""],
-                    ["name" => "Formulation", "link" => ""],
                 )
             ],
             [
@@ -55,23 +60,24 @@ class Sidebar extends Component
                 "sub"=> array(
                     ["name"=> "Schedule","link"=> ""],
                     ["name"=> "Gate Pass", "link"=> ""],
-                    // farm location and farm information
-                    ["name"=> "Farm Information", "link"=> ""],
-                    ["name"=> "Farm Location", "link"=> ""],
-                    ["name"=> "Accounting", "link"=> ""],
-                    ["name"=> "Delivery Status", "link"=> ""],
                 )
             ],
             [
-                "name" => "Forecasting",
-                "sub" =>  array(
-                    ["name" => "Monitoring Inventory Levels", "link" => ""],
-                ),
+                "name" => "Record Management",
+                "sub"=> array(
+                    ["name"=> "Feed Type Information","link"=> ""],
+                    ["name"=> "Quality Assurance", "link"=> ""],
+                    ["name"=> "DownTime", "link"=> ""],
+                    // farm location and farm information
+                    ["name"=> "Farm Information", "link"=> ""],
+                    ["name"=> "Farm Location", "link"=> ""],
+                )
             ],
+
             [
                 "name" => "Reports",
                 "sub" =>  array(
-                    ["name" => "Accounting Bills", "link" => ""],
+                    ["name" => "Accounting Bills", "link" =>route("reports.electric-cost.home")],
                     ["name"=> "Pivot logs", "link"=> ""],
                     ["name"=> "Audit Logs", "link"=> ""],
                 ),
