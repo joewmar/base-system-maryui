@@ -4,11 +4,10 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\RawMaterialItem>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Material>
  */
-class RawMaterialItemFactory extends Factory
+class MaterialFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -21,7 +20,6 @@ class RawMaterialItemFactory extends Factory
         return [
             'material_name' => fake()->word(),
             'category' => fake()->randomElement($categories),
-
         ];
     }
 }

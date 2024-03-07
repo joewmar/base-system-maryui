@@ -1,16 +1,11 @@
 <?php
 
-namespace App\Livewire\RawMaterials;
+namespace App\Livewire\RecordManagement;
 
 use Livewire\Component;
-use App\Models\FeedType;
-use Livewire\Attributes\On;
-use Illuminate\Support\Facades\DB;
-
 
 class FeedTypeHome extends Component
 {
-
     public $headers;
     public $feedTypes;
     public function mount()
@@ -41,7 +36,6 @@ class FeedTypeHome extends Component
     }
     public function render()
     {
-
-        return view('livewire.raw-materials.feed-type-home');
+        return view('livewire.record-management.feed-type-home');
     }
 }

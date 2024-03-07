@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\ElectricCost;
 use App\Models\Farm;
 use App\Models\FeedType;
+use App\Models\Material;
 use App\Models\RawMaterialItem;
 use App\Models\User;
 use Illuminate\Database\Seeder;
@@ -28,7 +29,7 @@ class DatabaseSeeder extends Seeder
         // ]);
         Farm::factory(10)->create();
         User::factory(10)->create();
-        RawMaterialItem::factory(10)->create();
+        Material::factory(10)->create();
         FeedType::factory(10)->create();
         ElectricCost::factory(10)->create();
     }

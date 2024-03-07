@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\FeedType;
 use App\Livewire\Dashboard;
 
 use Illuminate\Support\Facades\Route;
@@ -15,11 +14,11 @@ use App\Livewire\FarmInformation\FarmHome;
 use App\Livewire\Reports\ElectricCostHome;
 use App\Livewire\Settings\ActivitylogHome;
 use App\Http\Controllers\AccountController;
-use App\Livewire\RawMaterials\FeedTypeHome;
 use App\Http\Controllers\FarmInfoController;
 use App\Livewire\FarmInformation\FarmCreate;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthenticationController;
+use App\Livewire\RecordManagement\FeedTypeHome;
 
 // Fixed Route for all new application that will use Auth
 Route::get('/app-login/{id}', [AuthenticationController::class, 'app_login'])->name('app.login');
