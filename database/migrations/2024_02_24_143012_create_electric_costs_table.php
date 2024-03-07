@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('electric_costs', function (Blueprint $table) {
             $table->id();
+            $table->date('date');
             $table->float('electric_cost')->default(0);
             $table->boolean('active_status')->default(1);
             $table->timestamps();

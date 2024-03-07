@@ -1,8 +1,9 @@
 <?php
 
+use App\Models\FeedType;
 use App\Livewire\Dashboard;
-use Illuminate\Support\Facades\Route;
 
+use Illuminate\Support\Facades\Route;
 use App\Livewire\Settings\AccountsEdit;
 use App\Livewire\Settings\AccountsHome;
 use App\Services\GenericServices as GS;
@@ -11,14 +12,14 @@ use App\Livewire\Settings\AccountsCreate;
 use App\Utilities\GenericUtilities as GU;
 use App\Livewire\FarmInformation\FarmEdit;
 use App\Livewire\FarmInformation\FarmHome;
+use App\Livewire\Reports\ElectricCostHome;
+use App\Livewire\Settings\ActivitylogHome;
 use App\Http\Controllers\AccountController;
+use App\Livewire\RawMaterials\FeedTypeHome;
 use App\Http\Controllers\FarmInfoController;
 use App\Livewire\FarmInformation\FarmCreate;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\AuthenticationController;
-use App\Livewire\RawMaterials\FeedTypeHome;
-use App\Livewire\Settings\ActivitylogHome;
-use App\Models\FeedType;
 
 // Fixed Route for all new application that will use Auth
 Route::get('/app-login/{id}', [AuthenticationController::class, 'app_login'])->name('app.login');
@@ -56,6 +57,12 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 		// For Feed Type
 		route::get('/feed-type', FeedTypeHome::class)->name('feed-type-home');
 
+	});
+	Route::prefix('/reports')->name('reports.')->group(function(){
+		// Reports
+		Route::prefix('/electric-cost')->name('electric-cost.')->group(function(){
+			Route::get('/', ElectricCostHome::class)->name('home');			
+		});
 	});
 	
 	/**

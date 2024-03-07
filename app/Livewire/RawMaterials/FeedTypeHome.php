@@ -37,7 +37,7 @@ class FeedTypeHome extends Component
         $feedTypes->active_status = 0;
         $feedTypes->save();
         session()->flash('success', ' Feed Type '.$feedTypes->feed_type_name.' Successfully Deleted');
-        $this->redirect(route('raw-materials.feed-type-home'));
+        $this->redirect(route('raw-materials.feed-type-home',));
     }
     public function render()
     {
