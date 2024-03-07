@@ -1,7 +1,9 @@
 <?php
 
-use App\Livewire\Dashboard;
+use App\Models\Downtime;
 
+use App\Livewire\Dashboard;
+use App\Models\QualityAssurance;
 use Illuminate\Support\Facades\Route;
 use App\Livewire\Settings\AccountsEdit;
 use App\Livewire\Settings\AccountsHome;
@@ -17,8 +19,12 @@ use App\Http\Controllers\AccountController;
 use App\Http\Controllers\FarmInfoController;
 use App\Livewire\FarmInformation\FarmCreate;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\AuthenticationController;
+use App\Livewire\RecordManagement\DowntimeHome;
 use App\Livewire\RecordManagement\FeedTypeHome;
+use App\Livewire\DeliveryManagement\ScheduleHome;
+use App\Http\Controllers\AuthenticationController;
+use App\Livewire\RawMaterials\MaterialStorageHome;
+use App\Livewire\RecordManagement\QualityAssuranceHome;
 use App\Livewire\Settings\PermissionEdit;
 use App\Livewire\Settings\PermissionHome;
 
@@ -58,10 +64,16 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 	});
 	Route::prefix('/raw-materials')->name('raw-materials.')->group(function(){
 		// Raw-Materials
+		// For Material Storage
+		Route::get('material-storage', MaterialStorageHome::class)->name('material-storage-home');
 
+	});
+	Route::prefix('/record-management')->name('record-management.')->group(function(){
+		// Record-Management
 		// For Feed Type
-		route::get('/feed-type', FeedTypeHome::class)->name('feed-type-home');
-
+		Route::get('/feed-type', FeedTypeHome::class)->name('feed-type-home');
+		Route::get('quality-assurance', QualityAssuranceHome::class)->name('quality-assurance-home');
+		Route::get('downtime', DowntimeHome::class)->name('downtime-home');
 	});
 	Route::prefix('/reports')->name('reports.')->group(function(){
 		// Reports
@@ -69,7 +81,10 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 			Route::get('/', ElectricCostHome::class)->name('home');			
 		});
 	});
-	
+	Route::prefix('/delivery-management')->name('delivery-management.')->group(function(){
+		// Delivery-Management
+		Route::get('schedule', ScheduleHome::class)->name('schedule-home');
+	});
 	/**
 	 * YOUR CODE STARTS HERE
 	 * DO NOT ALTER ABOVE CODE

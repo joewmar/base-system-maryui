@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Downtime;
 use App\Models\ElectricCost;
 use App\Models\Farm;
 use App\Models\FeedType;
 use App\Models\Material;
+use App\Models\QualityAssurance;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -29,5 +31,7 @@ class DatabaseSeeder extends Seeder
         Material::factory(10)->create();
         FeedType::factory(10)->create();
         ElectricCost::factory(10)->create();
+        QualityAssurance::factory(10)->create();
+        Downtime::factory(10)->create();
     }
 }

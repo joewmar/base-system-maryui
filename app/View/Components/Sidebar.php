@@ -33,11 +33,8 @@ class Sidebar extends Component
             [
                 "name" =>  "Raw Materials",
                 "sub" =>  array(
-                    ["name" => "Micro Storage", "link" => ""],
-                    ["name" => "Macro Storage", "link" => ""],
-                    ["name" => "Medicine Storage", "link" => ""],
-                    ["name" => "Feed Types", "link" =>route("raw-materials.feed-type-home")],
-                    ["name" => "Material Inventory", "link" => ""],
+                    ["name" => "Feed Types", "link" =>route("record-management.feed-type-home")],
+                    ["name" => "Materials Storage", "link" =>route("raw-materials.material-storage-home")],
 
                 ),
             ],
@@ -58,16 +55,16 @@ class Sidebar extends Component
             [
                 "name" => "Delivery Management",
                 "sub"=> array(
-                    ["name"=> "Schedule","link"=> ""],
+                    ["name"=> "Schedule","link"=> route('delivery-management.schedule-home')],
                     ["name"=> "Gate Pass", "link"=> ""],
                 )
             ],
             [
                 "name" => "Record Management",
                 "sub"=> array(
-                    ["name"=> "Feed Type Information","link"=> ""],
-                    ["name"=> "Quality Assurance", "link"=> ""],
-                    ["name"=> "DownTime", "link"=> ""],
+                    ["name"=> "Feed Type Information","link"=>route("record-management.feed-type-home")],
+                    ["name"=> "Quality Assurance", "link"=>route('record-management.quality-assurance-home')],
+                    ["name"=> "DownTime", "link"=>route('record-management.downtime-home')],
                     // farm location and farm information
                     ["name"=> "Farm Information", "link"=> ""],
                     ["name"=> "Farm Location", "link"=> ""],

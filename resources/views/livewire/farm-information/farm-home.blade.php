@@ -6,12 +6,15 @@
     <div class="p-4 text-center font-bold text-3xl">
         <h3>Farm</h3>
     </div>
+
+    {{-- Search and Add Button --}}
     <div class="w-full mb-3 flex justify-between items-center">
         <div><x-input label="Search" wire:model.live="search" inline icon="o-magnifying-glass" type="search" class="input-sm" /></div>
         <div><x-button icon="o-plus" label="Add" link="{{route('farm.information.farm.create')}}" /></div>
     </div>
     <div class="h-full p-3">
 
+        {{-- Table --}}
         <x-table :headers="$headers" :rows="$farms" :sort-by="$sortBy" selectable with-pagination   >
             @scope('actions', $farm)
                 <div class="flex justify-around w-full space-x-2">
@@ -19,6 +22,7 @@
                     <x-button icon="o-trash" tooltip="Remove" class="bg-red-500 btn-sm" onclick="modal{{$this->loop->index+1}}.showModal()" />
                 </div>
                 <div>
+                    {{-- add modal --}}
                     <x-modal id="modal{{$this->loop->index+1}}" title="Are you sure?" persistent >
                         <div class="flex justify-start">
                             <div>Do you want to remove this: {{$farm->farm_name}}</div>

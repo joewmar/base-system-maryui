@@ -10,11 +10,14 @@
     <div class="p-4 text-center font-bold text-3xl">
         <h3>Electric Cost</h3>
     </div>
+
+    {{-- Search and Add Button --}}
     <div class="flex justify-between my-5 p-3 ">
         <div><x-input label="Search" inline icon="o-magnifying-glass" wire:model="search" type="search" class="input-sm" /></div>
         <div><x-button icon="o-plus" label="Add" wire:click="add()" /></div>
     </div>
 
+    {{-- Table --}}
     <x-table :headers="$headers" :rows="$ElectricCosts" :sort-by="$sortBy" selectable with-pagination >
         @scope('cell_date', $date)
             {{\Carbon\Carbon::parse($date->date)->format('F')}}
@@ -32,7 +35,11 @@
             @endscope
         @endif
     </x-table>
+
+    {{-- DELETE MODAL --}}
     @include('partials.delete-modal')
+
+    {{-- Date Picker --}}
     @section('scripts')
         <script src="https://npmcdn.com/flatpickr/dist/l10n/fr.js"></script>
         <script src="https://npmcdn.com/flatpickr/dist/l10n/pt.js"></script>

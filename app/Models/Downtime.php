@@ -5,14 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Material extends Model
+class Downtime extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'id',
-        'materials_name',
-        'category',
+        'description',
+        'code',
         'active_status',
     ];
 }
