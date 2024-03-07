@@ -6,11 +6,8 @@ use App\Models\ElectricCost;
 use App\Models\Farm;
 use App\Models\FeedType;
 use App\Models\Material;
-use App\Models\RawMaterialItem;
 use App\Models\User;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
 {
