@@ -12,17 +12,17 @@
                     <x-icon name="s-user-group" class="w-20 h-20" />
                     <div class="items-center text-center">
                         <h2 class="p-2 font-medium">Account</h2>
-                        <p class="p-2">Manage Student Account</p>
+                        <p class="p-2">Manage User Account</p>
                     </div>
                 </a>
                 <a href="{{route('settings.activitylog.home')}}" class="p-8 items-center rounded-lg text-center shadow-xl hover:bg-slate-300   hover:text-gray-700">
                     <x-icon name="m-clipboard" class="w-20 h-20 " />
                     <div class="items-center text-center">
                         <h2 class="p-2 font-medium">Activity Log</h2>
-                        <p class="p-2">Manage your School Activity</p>
+                        <p class="p-2">Manage your User Activity</p>
                     </div>
                 </a>
-                <a href="" class="p-10 rounded-lg items-center text-center shadow-xl hover:bg-slate-300   hover:text-gray-700">
+                <a href="{{route('settings.permission.home')}}" class="p-10 rounded-lg items-center text-center shadow-xl hover:bg-slate-300   hover:text-gray-700">
                     <x-icon name="s-key" class="w-20 h-20" />
                     <div class=" items-center text-center">
                         <h2 class="p-2 font-medium">Permission</h2>

@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('email')->nullable();
             $table->string('password')->nullable();
             $table->string('role', 20)->nullable();
+            $table->text('access_controls')->nullable();
+            $table->boolean('active_status')->default(1);
             $table->timestamps();
         });
     }

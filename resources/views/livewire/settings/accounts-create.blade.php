@@ -6,21 +6,35 @@
             <x-button icon="o-arrow-left" class="btn-circle btn-ghost" link="{{route('settings.accounts.home')}}"  />
         </div>
         <div class="p-4 text-center font-bold text-3xl">
-            <h3>Accounts</h3>
+            <h3>Create Accounts</h3>
         </div>
         <div class="mt-5">
-            <x-form wire:submit="add">
+            <x-form>
                 <x-input label="Name"  inline wire:model.live="name"  />
                 <x-input label="Email" type="email" inline wire:model.live="email" />
                 <x-select label="Role"  :options="$selectedRoles" option-value="value" option-label="label" placeholder="Select an user" placeholder-value="" wire:model.live="role" inline />
-                <x-input label="Password" type="password" inline wire:model.live="password" />
+                <x-input id="passw" class="showPassword" label="Password" type="password" inline wire:model.live="password" >
+                    <x-slot:append>
+                        {{-- Add `rounded-l-none` class --}}
+                        <x-button type="button" icon="s-eye" class="rounded-l-none btn-ghost" onclick="showPass('showPassword')" />
+                    </x-slot:append>
+                </x-input>
                 <x-input label="Confirm Password" type="password" inline wire:model.live="password_confirmation" />
                 <x-slot:actions>
-                    <x-button label="Add" class="btn-primary" type="submit" />
+                    <x-button label="Add" class="btn-primary" onclick="createModal('add', 'Do you want to add this account', 'add')" />
                 </x-slot:actions>
-                <x-process-dialog target="add" />
-
             </x-form>
+            {{-- <x-process-dialog /> --}}
+            @include('partials.create-modal')
+            @section('styles')
+                <script>
+                    function showPass(cls) {
+                        var x = document.querySelector('.'+cls);
+                        if (x.type == "password") x.type = "text";
+                        else x.type = "password";
+                    }
+                </script>
+            @endsection
         </div>
     </div>
 </div>

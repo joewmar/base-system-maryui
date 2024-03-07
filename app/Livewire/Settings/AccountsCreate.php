@@ -4,7 +4,9 @@ namespace App\Livewire\Settings;
 
 use App\Models\User;
 use Livewire\Component;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
+use Illuminate\Support\Carbon;
 
 class AccountsCreate extends Component
 {
@@ -21,12 +23,14 @@ class AccountsCreate extends Component
     public $selectedRoles;
     public function mount()
     {
+        $this->password = 'Brookside' . Carbon::now()->format('Y');
         $this->selectedRoles = [
             ["value" => "admin", "label" => "ADMIN"],
             ["value" => "superuser", "label" => "SUPERUSER"],
             ["value" => "user", "label" => "USER"],
         ];
     }
+    #[On('add')]
     public function add()
     {
         $this->validate();

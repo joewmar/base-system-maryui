@@ -25,6 +25,8 @@ use App\Livewire\DeliveryManagement\ScheduleHome;
 use App\Http\Controllers\AuthenticationController;
 use App\Livewire\RawMaterials\MaterialStorageHome;
 use App\Livewire\RecordManagement\QualityAssuranceHome;
+use App\Livewire\Settings\PermissionEdit;
+use App\Livewire\Settings\PermissionHome;
 
 // Fixed Route for all new application that will use Auth
 Route::get('/app-login/{id}', [AuthenticationController::class, 'app_login'])->name('app.login');
@@ -55,6 +57,10 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 		Route::get('/accounts/{id}/edit', AccountsEdit::class)->name('accounts.edit');
 		//Activity Log
 		Route::get('/activity-log', ActivitylogHome::class)->name('activitylog.home');
+		// Permission
+		Route::get('/permission', PermissionHome::class)->name('permission.home');
+		Route::get('/permission/{id}', PermissionEdit::class)->name('permission.edit');
+	
 	});
 	Route::prefix('/raw-materials')->name('raw-materials.')->group(function(){
 		// Raw-Materials
