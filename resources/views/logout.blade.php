@@ -8,11 +8,11 @@
 	<h3>Logout Success...</h3>
 @endsection
 
-@section('scripts')
+@push('scripts')
 	<script>
 		setInterval(function() {
 			window.location.replace("{{ route('login') }}")
 		}, 3000);
 		
 	</script>
-@endsection
+@endpush

@@ -12,7 +12,7 @@
 	</ul>
 @endsection
 
-@section('scripts')
+@push('scripts')
 	<script src="{{ asset('js/jquery.min.js') }}"></script>
 	{{-- <script>
 		$.ajax({
@@ -25,4 +25,4 @@
 			}
 		});
 	</script> --}}
-@endsection
+@endpush

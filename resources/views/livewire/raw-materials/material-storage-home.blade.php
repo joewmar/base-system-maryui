@@ -1,5 +1,9 @@
 @section('title') Materials Storage @endsection
+@include('partials.edit-modal')
+@include('partials.create-modal')
+@include('partials.delete-modal')
 <div class="h-fit m-5">
+
     <div class="pt-12 w-full h-full flex flex-col space-y-10 justify-center items-start">
         <x-button icon="o-arrow-left" class="btn-circle btn-ghost" link="" />
     </div>
@@ -28,35 +32,39 @@
                 @endscope
                 @scope('actions', $material)
                     <div class="flex justify-around w-full space-x-2">
-                        <x-button icon="o-pencil-square" tooltip="Edit" class="bg-green-500 btn-sm" link="" />
+                        <x-button icon="o-pencil-square" tooltip="Edit" class="bg-green-500 btn-sm" @click="$wire.editModal = true; $wire.edit('{{encrypt($material->id)}}')" />
                         <x-button icon="o-trash" tooltip="Remove" class="bg-red-500 btn-sm" onclick="deleteModal('{{encrypt($material->id)}}', '{{$material->material_name}}')" />
                     </div>
                 @endscope
             </x-table>
-            
+
     </div>
     {{-- Add Modal --}}
     <x-modal wire:model="addModal" title="Add Material" separator>
         <div class="space-y-3">
+            <x-process-dialog target="editModal" />
             <x-input label="Material" wire:model.live='materialName' inline />
-            <x-select label="Category" icon="o-user" option-value="key" option-label="label" placeholder="Select Category" placeholder-value="" inline :options="$selectCategory" wire:model.live="category" />
+            <x-select label="Category" icon="o-user" option-value="key" option-label="label" placeholder="Select Category" placeholder-value="" inline :options="[['key' => 'macro', 'label' => 'Macro'], ['key' => 'micro', 'label' => 'Micro'], ['key' => 'medicine', 'label' => 'Medicine']]" wire:model.live="category" />
         </div>
         <x-slot:actions>
-            <x-button label="Cancel" @click="$wire.addModal = false" />
-            <x-button label="Confirm" class="btn-primary" />
+            <div>
+                <x-button label="Add" class="btn-primary" onclick="createModal('add', 'Do you want to add this material', 'add')" />
+                <x-button label="Cancel" @click="$wire.addModal = false" />
+            </div>
         </x-slot:actions>
     </x-modal>
     {{-- Edit Modal --}}
-    <x-modal id="editModal" title="Edit Materials" class="backdrop-blur" separator>
-        <div class="flex flex-col space-y-3">
-        <div><x-input label="Description" wire:model.live='editdescription' inline /></div>
-        <div><x-input label="Code" wire:model.live='editcode' inline /></div>
+    <x-modal wire:model="editModal" title="Edit Material: {{$editMatRefName}}" separator persistent >
+        <div class="space-y-3">
+            <x-input label="Material" wire:model.live='editMaterialName' inline />
+            <x-select label="Category" icon="o-user" option-value="key" option-label="label" placeholder="Select Category" placeholder-value="" inline :options="[['key' => 'macro', 'label' => 'Macro'], ['key' => 'micro', 'label' => 'Micro'], ['key' => 'medicine', 'label' => 'Medicine']]" wire:model.live="editCategory" />
         </div>
         <x-slot:actions>
+            <x-button label="Save" class="btn-primary" onclick="editModal('{{$editMaterialID}}')" />
             <x-button label="Cancel" @click="$wire.editModal = false" />
-            <x-button label="Update"  class="bg-green-500 hover:bg-green-600" icon="c-pencil-square" />
         </x-slot:actions>
     </x-modal>
+
     {{-- Delete Modal --}}
-    @include('partials.delete-modal')
+    {{-- @include('partials.cancel-modal') --}}
 </div>

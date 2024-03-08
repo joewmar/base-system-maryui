@@ -1,4 +1,4 @@
-@section('scripts')
+@push('styles')
     <script>
         function deleteModal(delID, name) {
             Swal.fire({
@@ -24,4 +24,4 @@
             });
         }
     </script>
-@endsection
+@endpush

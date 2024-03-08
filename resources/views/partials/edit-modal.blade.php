@@ -1,18 +1,18 @@
 @push('styles')
     <script>
-        function createModal(method, message, key) {
+        function editModal(editID) {
             Swal.fire({
                 title: "Are you sure?",
-                text: message ,
+                text: 'Do you want to change this' ,
                 icon: "question",
                 showCancelButton: true,
                 confirmButtonColor: "#22C55E",
                 cancelButtonColor: "#EF4444",
-                confirmButtonText: "Yes, "+key+" it!",
+                confirmButtonText: "Yes, change it!",
                 cancelButtonText: "No, cancel!",
             }).then((result) => {
                 if (result.isConfirmed) {
-                    Livewire.dispatch(method);
+                    Livewire.dispatch('save',  {id: editID});
                 }
                 else if (result.dismiss === Swal.DismissReason.cancel) {
                     Swal.fire({

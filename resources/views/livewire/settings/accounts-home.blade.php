@@ -29,7 +29,7 @@
 
     </div>                
     {{-- <x-process-dialog  /> --}}
-    @section('scripts')
+    @push('scripts')
         <script type="module" src="{{asset('js/app.js')}}"></script>
-    @endsection
+    @endpush
 </div>

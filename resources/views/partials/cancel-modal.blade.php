@@ -1,6 +1,6 @@
-@section('scripts')
+@push('scripts')
     <script>
-        function cancelModal {
+        function cancelModal() {
             Swal.fire({
                 title: "Action Cancelled",
                 icon: "error",
@@ -9,4 +9,4 @@
             });
         }
     </script>
-@endsection
+@endpush

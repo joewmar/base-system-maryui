@@ -2,6 +2,7 @@
 
 namespace App\Livewire\RawMaterials;
 
+use App\Models\Farm;
 use Livewire\Component;
 use App\Models\Material;
 use Illuminate\Support\Str;
@@ -28,9 +29,19 @@ class MaterialStorageHome extends Component
     #[Rule('required|unique:materials,material_name')]
     public $materialName;
 
-    public $selectCategory;
+
+    #[Rule('required')]
+    public $editCategory;
+    #[Rule('required')]
+    public $editMaterialName;
+
+    public $editMaterialID;
+    public $editMatRefName;
+
     
     public bool $addModal = false;
+    public bool $editModal = false;
+
     public function mount()
     {
         $this->headers = [
@@ -38,22 +49,49 @@ class MaterialStorageHome extends Component
             ['key' => 'material_name', 'label' => 'Item', 'class' => 'text-neutral'],
             ['key' => 'category', 'label' => 'Category', 'class' => 'text-neutral'],
         ];
-        $this->selectCategory = [
-            ['key' => 'marco', 'label' => 'Marco'],
-            ['key' => 'micro', 'label' => 'Micro'],
-            ['key' => 'medicine', 'label' => 'Medicine'],
-        ];
     }
 
-    
-
+    public function edit(string $id)
+    {
+        if($this->editModal){
+            $material = Material::findOrfail(decrypt($id));
+            $this->editCategory = $material->category;
+            $this->editMaterialName = $material->material_name;
+            $this->editMatRefName = $material->material_name;
+            $this->editMaterialID = $id;
+        }
+    }
+    #[On('save')]
+    public function save(string $id)
+    {
+        $this->validate([
+            'editCategory' => 'required',
+            'editMaterialName' => 'required'
+        ]);
+        $material = Material::findOrfail(decrypt($id));
+        if($material){
+            $material->category = $this->editCategory;
+            $material->material_name = $this->editMaterialName;
+            $material->save();
+            session()->flash('success', 'Material of '.$material->material_name.' successfully updated');
+            $this->redirect(route('raw-materials.material-storage-home'));
+        }
+    }
+    #[On('add')]
     public function add()
     {
-        // $this->dispatch('success', ['message' => 'Record Added']);
-
-        session()->flash('error', 'Record Error Saved');
-        $this->redirect(route('raw-materials.material-storage-home'));
-
+        $validated = $this->validate([
+            'category' => 'required',
+            'materialName' => 'required|unique:materials,material_name',
+        ]);
+        $material = Material::create([
+            'material_name' => $validated['materialName'],
+            'category' => $validated['category'],
+        ]);
+        if($material){
+            session()->flash('success', 'Material successfully added');
+            $this->redirect(route('raw-materials.material-storage-home'));
+        }
     }
     #[On('remove')] 
     public function remove(string $id)
@@ -67,6 +105,9 @@ class MaterialStorageHome extends Component
 
     public function updatingSearch()
     {
+        $this->resetPage();
+    }
+    public function updatedFilterCategory(){
         $this->resetPage();
     }
     public function render()

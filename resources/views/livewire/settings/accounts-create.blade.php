@@ -26,7 +26,7 @@
             </x-form>
             {{-- <x-process-dialog /> --}}
             @include('partials.create-modal')
-            @section('styles')
+            @push('styles')
                 <script>
                     function showPass(cls) {
                         var x = document.querySelector('.'+cls);
@@ -34,7 +34,7 @@
                         else x.type = "password";
                     }
                 </script>
-            @endsection
+            @endpush
         </div>
     </div>
 </div>
