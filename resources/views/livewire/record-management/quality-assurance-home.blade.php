@@ -8,12 +8,13 @@
     </div>
     {{-- Search and Add Button --}}
     <div class="flex justify-between my-5 p-3 ">
-        <div><x-input label="Search" inline icon="o-magnifying-glass" type="search" class="input-sm" /></div>
+        <div>
+            <x-input label="Search" inline icon="o-magnifying-glass" type="search" class="input-sm" />
+        </div>
         <div>
             <x-button label="Add" class="btn-primary text-sm" icon="m-plus-small" @click="$wire.addModal = true" />
         </div>
     </div>
-
     {{-- Table --}}
     <x-table :headers="$headers" :rows="$qualityAssurances" striped with-pagination  >
         @scope('actions', $qualityAssurance)

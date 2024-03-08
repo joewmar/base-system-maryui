@@ -10,6 +10,8 @@ use App\Livewire\Settings\AccountsHome;
 use App\Services\GenericServices as GS;
 use App\Http\Controllers\LoginController;
 use App\Livewire\Settings\AccountsCreate;
+use App\Livewire\Settings\PermissionEdit;
+use App\Livewire\Settings\PermissionHome;
 use App\Utilities\GenericUtilities as GU;
 use App\Livewire\FarmInformation\FarmEdit;
 use App\Livewire\FarmInformation\FarmHome;
@@ -24,9 +26,10 @@ use App\Livewire\RecordManagement\FeedTypeHome;
 use App\Livewire\DeliveryManagement\ScheduleHome;
 use App\Http\Controllers\AuthenticationController;
 use App\Livewire\RawMaterials\MaterialStorageHome;
+use App\Livewire\Requisition\WeeklyRequisitionHome;
+use App\Livewire\RawMaterials\IngredientsStorageEdit;
+use App\Livewire\RawMaterials\IngredientsStorageHome;
 use App\Livewire\RecordManagement\QualityAssuranceHome;
-use App\Livewire\Settings\PermissionEdit;
-use App\Livewire\Settings\PermissionHome;
 
 // Fixed Route for all new application that will use Auth
 Route::get('/app-login/{id}', [AuthenticationController::class, 'app_login'])->name('app.login');
@@ -64,6 +67,11 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 	});
 	Route::prefix('/raw-materials')->name('raw-materials.')->group(function(){
 		// Raw-Materials
+		// Route for Ingredients Storage
+		Route::prefix('/ingredients-storage')->name('ingredients-storage.')->group(function (){
+			Route::get('/', IngredientsStorageHome::class)->name('home');
+			Route::get('/edit', IngredientsStorageEdit::class)->name('edit');
+		});
 		// For Material Storage
 		Route::get('material-storage', MaterialStorageHome::class)->name('material-storage-home');
 
@@ -84,6 +92,11 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 	Route::prefix('/delivery-management')->name('delivery-management.')->group(function(){
 		// Delivery-Management
 		Route::get('schedule', ScheduleHome::class)->name('schedule-home');
+	});
+
+	Route::prefix('/requisition')->name('requisition.')->group(function(){
+		// Requisition
+		Route::get('/weeekly-requisition', WeeklyRequisitionHome::class)->name('weekly-requisition-home');
 	});
 	/**
 	 * YOUR CODE STARTS HERE
