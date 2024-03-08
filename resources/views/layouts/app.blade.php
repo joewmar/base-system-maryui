@@ -26,29 +26,15 @@
       @yield('content')
     @endauth     --}}
 
+
+    @livewireScripts
+
     {{-- Alerts  --}}
     @if (session()->has('success'))
-      <script>
-        window.addEventListener('DOMContentLoaded', function () {
-            Swal.fire({
-              title: "Success!",
-              text: "{{session('success')}}",
-              icon: "success"
-            });
-        });
-      </script>
+      @include('partials.alert-success', ['message' => session('success')])
     @elseif (session()->has('error'))
-      <script>
-        window.addEventListener('DOMContentLoaded', function () {
-            Swal.fire({
-              title: "Something went wrong!",
-              text: "{{session('error')}}",
-              icon: "error",
-            });
-        });
-      </script>
+      @include('partials.alert-error', ['message' => session('error')])
     @endif
     @yield('scripts')
-    @livewireScripts
   </body>
 </html>

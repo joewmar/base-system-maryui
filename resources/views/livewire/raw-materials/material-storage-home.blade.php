@@ -8,33 +8,39 @@
     </div>
 
     {{-- Search and Add Button --}}
-    <div class="flex justify-between my-5 p-3 ">
-        <div><x-input label="Search" inline icon="o-magnifying-glass" type="search" class="input-sm" /></div>
+    <div class="flex justify-between items-center my-5 p-3 ">
+        <div><x-input label="Search" inline icon="o-magnifying-glass" type="search" /></div>
         <div>
             <x-button label="Add" @click="$wire.addModal = true" />
         </div>
     </div>
 
-    {{-- Table --}}
-    <x-table :headers="$headers" :rows="$materials" striped with-pagination >
-        @scope('actions', $material)
-            <div class="flex justify-around w-full space-x-2">
-                <x-button icon="o-pencil-square" tooltip="Edit" class="bg-green-500 btn-sm" link="" />
-                <x-button icon="o-trash" tooltip="Remove" class="bg-red-500 btn-sm" onclick="deleteModal('{{encrypt($material->id)}}', '{{$material->material_name}}')" />
-            </div>
-        @endscope
-    </x-table>
-    
+    <div class="pt-5">
+        <x-radio :options="[['key' => '', 'label' => 'All'], ['key' => 'macro', 'label' => 'Macro'], ['key' => 'micro', 'label' => 'Micro'], ['key' => 'medicine', 'label' => 'Medicine']]" option-value="key" option-label="label" wire:model.live="filterCategory" />
+
+            {{-- Table --}}
+            <x-table :headers="$headers" :rows="$materials" striped with-pagination >
+                @scope('cell_material_name', $material_name)
+                    {{ Str::upper($material_name->material_name) }}
+                @endscope
+                @scope('cell_category', $category)
+                    {{ Str::upper($category->category) }}
+                @endscope
+                @scope('actions', $material)
+                    <div class="flex justify-around w-full space-x-2">
+                        <x-button icon="o-pencil-square" tooltip="Edit" class="bg-green-500 btn-sm" link="" />
+                        <x-button icon="o-trash" tooltip="Remove" class="bg-red-500 btn-sm" onclick="deleteModal('{{encrypt($material->id)}}', '{{$material->material_name}}')" />
+                    </div>
+                @endscope
+            </x-table>
+            
+    </div>
     {{-- Add Modal --}}
     <x-modal wire:model="addModal" title="Add Material" separator>
-        <div><x-input label="Input Material" wire:model.live='materialName' inline /></div>
-        <div><x-select label="Category" icon="o-user" 
-            option-value="key"
-            option-label="label"
-            placeholder="Select Category"
-            placeholder-value=""
-            :options="$selectCategory" wire:model.live="category" /></div>
-     
+        <div class="space-y-3">
+            <x-input label="Material" wire:model.live='materialName' inline />
+            <x-select label="Category" icon="o-user" option-value="key" option-label="label" placeholder="Select Category" placeholder-value="" inline :options="$selectCategory" wire:model.live="category" />
+        </div>
         <x-slot:actions>
             <x-button label="Cancel" @click="$wire.addModal = false" />
             <x-button label="Confirm" class="btn-primary" />
