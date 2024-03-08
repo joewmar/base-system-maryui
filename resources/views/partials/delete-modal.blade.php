@@ -13,6 +13,14 @@
                 if (result.isConfirmed) {
                     Livewire.dispatch('remove', {id: delID});
                 }
+                else if (result.dismiss === Swal.DismissReason.cancel) {
+                    Swal.fire({
+                        title: "Action Cancelled",
+                        icon: "error",
+                        timer: 1000,
+                        showConfirmButton: false,
+                    });
+                }
             });
         }
     </script>

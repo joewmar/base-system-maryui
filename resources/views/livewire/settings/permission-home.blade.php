@@ -17,7 +17,7 @@
             @endscope
             @scope('actions', $user)
                 <div class="flex justify-between space-x-2">
-                    <x-button label="View" tooltip="Edit" class="btn-success btn-sm text-white" link="{{route('settings.permission.edit', encrypt($user->id))}}" />
+                    <x-button label="View" class="btn-success btn-sm text-white" link="{{route('settings.permission.edit', encrypt($user->id))}}" />
                 </div>
             @endscope
         </x-table>

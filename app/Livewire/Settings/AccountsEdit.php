@@ -55,6 +55,7 @@ class AccountsEdit extends Component
         $this->account->password = bcrypt($this->password);
         $this->account->save();
         session()->flash("success","Change Password successfully updated");
+        
         $this->redirect(route("settings.accounts.home"));
     }
     public function render()

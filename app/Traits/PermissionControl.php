@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\Audit;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 trait PermissionControl {
@@ -32,15 +33,6 @@ trait PermissionControl {
                 "production_inventory ",
                 "feed_information",
             ],
-            "tour_menu" => [
-                "module",
-                "create_menu",
-                "edit_menu",
-                "delete_menu",
-                "create_price",
-                "edit_price",
-                "delete_price",
-            ],
             "delivery_management" => [
                 "module",
                 "schedule",
@@ -52,15 +44,29 @@ trait PermissionControl {
                 "downtime",
                 "farm_information",
                 "farm_location",
-                "delete_announcement",
             ],
-            "reports " => [
+            "reports" => [
                 "module",
                 "accounting_bills",
                 "pivot_logs"
             ],
         );
         return $arrAccessList;
+    }
+    public function checkModule(array $modules)
+    {
+        $mods = $this->getModules();
+    }
+    public function strToArray(string $value)
+    {
+        $arr = explode(',', $value);
+        foreach ($arr as $key => $value) {
+            $mod = Str::before($value, '(');
+            $submod = Str::between ($value, '(', ')');
+            $new[$mod][] = $submod;
+        }
+
+        return $new ?? [] ;
     }
 
 }

@@ -4,6 +4,7 @@ namespace App\Livewire\RawMaterials;
 
 use Livewire\Component;
 use App\Models\Material;
+use Illuminate\Support\Str;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
 use Livewire\WithPagination;
@@ -17,7 +18,11 @@ class MaterialStorageHome extends Component
 
     #[Url]
     public $search ;
+
+    public array $selected = [];
     public $headers;
+    public $filterCategory = '';
+
     #[Rule('required')]
     public $category;
     #[Rule('required|unique:materials,material_name')]
@@ -66,6 +71,7 @@ class MaterialStorageHome extends Component
     }
     public function render()
     {
-        return view('livewire.raw-materials.material-storage-home', ['materials' => DB::table('materials')->where('active_status', 1)->where('material_name', 'like', '%' . $this->search . '%')->orderBy(...array_values($this->sortBy))->paginate(5)]);
+        $data =  DB::table('materials')->where('active_status', 1)->where('category', 'like', '%' . $this->filterCategory . '%')->where('material_name', 'like', '%' . Str::upper($this->search) . '%')->orderBy(...array_values($this->sortBy))->paginate(5);
+        return view('livewire.raw-materials.material-storage-home', ['materials' => $data]);
     }
 }
