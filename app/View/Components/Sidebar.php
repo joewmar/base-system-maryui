@@ -22,19 +22,20 @@ class Sidebar extends Component
         $this->list = [
             [
                 "name" => "Dashboard",
-                "link" => "",
+                "link" => "/",
             ],
             [
                 "name" => "Requisition",
                 "sub" => array(
-                    ["name" => "Weekly Order", "link" => ""],
+                    ["name" => "Weekly Order", "link" =>route("requisition.weekly-requisition-home")],
                 )
             ],
             [
                 "name" =>  "Raw Materials",
                 "sub" =>  array(
-                    ["name" => "Feed Types", "link" =>route("record-management.feed-type-home")],
+                    ["name" => "Ingredients Storage", "link" =>route("raw-materials.ingredients-storage.home")],
                     ["name" => "Materials Storage", "link" =>route("raw-materials.material-storage-home")],
+
 
                 ),
             ],

@@ -6,20 +6,35 @@
     </div>
 
     <div class="p-3 grid gap-2 grid-cols-1 md:grid-cols-3 grid-rows-1 w-auto h-auto text-slate-700 ">
-        <div href="" class="grid-cols-2 grid grid-rows-2 space-y-1 font-semibold h-32 p-3 rounded-lg items-center text-start shadow-xl border border-black hover:bg-slate-300   hover:text-gray-700">
-            <div class="text-3xl">10,000</div>
-            <div class="row-span-full text-5xl "><i class="fa-brands fa-nutritionix"></i></div>
-            <div class="">Macro</div>
+        <div >
+            <x-stat
+                class="bg-slate-100 rounded "
+                title="Macro"
+                description="This month"
+                value="22.124"
+                icon="o-arrow-trending-up"
+                color="text-green-700"
+                />
         </div>
-        <div href="" class="grid-cols-2 grid grid-rows-2 space-y-1 font-semibold h-32 p-3 rounded-lg items-center text-start shadow-xl border border-black hover:bg-slate-300   hover:text-gray-700">
-            <div class="text-3xl">10,000</div>
-            <div class="row-span-full text-5xl "><i class="fa-solid fa-pills"></i></div>
-            <div class="">Micro</div>
+        <div >
+            <x-stat
+            class="bg-slate-100 rounded "
+            title="Micro"
+            description="This month"
+            value="34"  
+            icon="o-arrow-trending-down"
+            color="text-red-700"
+            />
         </div>
-        <div href="" class="grid-cols-2 grid grid-rows-2 space-y-1 font-semibold h-32 p-3 rounded-lg items-center text-start shadow-xl border border-black hover:bg-slate-300   hover:text-gray-700">
-            <div class="text-3xl">10,000</div>
-            <div class="row-span-full text-5xl"><i class="fa-solid fa-syringe"></i></div>
-            <div class="">Medicine</div>
+        <div >
+            <x-stat
+            title="Medicine"
+            description="This month"
+            value="22.124"
+            icon="o-arrow-trending-down"
+            class=" bg-slate-100 rounded"
+            color="text-red-700 "
+            />
         </div>
     </div>
 

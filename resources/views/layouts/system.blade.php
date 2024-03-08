@@ -1,5 +1,5 @@
 <div class="absolute h-screen w-screen top-0 left-0 -z-50 bg-opacity-85 bg-gray-700">
-    <img src="{{asset('img/sample-bg.jpg')}}" alt="" class="opacity-20 w-full h-full object-center">
+    <img src="{{asset('img/feedmilll-BG.jpg')}}" alt="" class="opacity-20 w-full h-full object-center">
 </div>
 <div class="grid overflow-y-hidden grid-cols-5 grid-rows-8 md:w-screen h-screen">
     @yield('top')

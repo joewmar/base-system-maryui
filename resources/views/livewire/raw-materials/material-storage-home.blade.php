@@ -46,5 +46,17 @@
             <x-button label="Confirm" class="btn-primary" />
         </x-slot:actions>
     </x-modal>
+    {{-- Edit Modal --}}
+    <x-modal id="editModal" title="Edit Materials" class="backdrop-blur" separator>
+        <div class="flex flex-col space-y-3">
+        <div><x-input label="Description" wire:model.live='editdescription' inline /></div>
+        <div><x-input label="Code" wire:model.live='editcode' inline /></div>
+        </div>
+        <x-slot:actions>
+            <x-button label="Cancel" @click="$wire.editModal = false" />
+            <x-button label="Update"  class="bg-green-500 hover:bg-green-600" icon="c-pencil-square" />
+        </x-slot:actions>
+    </x-modal>
+    {{-- Delete Modal --}}
     @include('partials.delete-modal')
 </div>
