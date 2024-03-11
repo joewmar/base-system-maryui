@@ -13,6 +13,9 @@ use Livewire\Attributes\Rule;
 class IngredientsStorageEdit extends Component
 {
 
+
+    public $ingridientsheaders;
+
     public $material;
     public $inv_date;
 
@@ -64,6 +67,11 @@ class IngredientsStorageEdit extends Component
         $this->farms = Farm::where('active_status', 1)->get();
         $this->ingredents = collect(['item1' => []]);
         $this->inv_date = date('Y-m-d');
+        $this->ingridientsheaders = [
+            ['key' => 'id', 'label' => '#', 'class' => 'text-neutral'],
+            ['key' => 'material_name', 'label' => 'Ingridients', 'class' => 'text-neutral'],
+            ['key' => 'category', 'label' => 'Price', 'class' => 'text-neutral'],
+        ];
     }
 
     public function updated($propertyName)

@@ -17,7 +17,8 @@
     </div>
     <x-tabs selected="table-tab">
         <x-tab name="table-tab" label="List" icon="o-list-bullet">
-            <x-datepicker label="Date" wire:model="listDate" icon="o-calendar" :config="$config" inline />
+          <x-datepicker label="Date" wire:model="listDate" icon="o-calendar" :config="$config" inline />
+          <x-table :headers="$ingridientsheaders" :rows="$material" striped  />
         </x-tab>
         <x-tab name="create-tab" label="Create New" icon="o-sparkles">
             {{-- Calendar-Date --}}
