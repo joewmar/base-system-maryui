@@ -1,7 +1,6 @@
 <?php
 
 use App\Models\Downtime;
-
 use App\Livewire\Dashboard;
 use App\Models\QualityAssurance;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +24,7 @@ use App\Livewire\RecordManagement\DowntimeHome;
 use App\Livewire\RecordManagement\FeedTypeHome;
 use App\Livewire\DeliveryManagement\ScheduleHome;
 use App\Http\Controllers\AuthenticationController;
+use App\Livewire\FarmInformation\FarmLocationHome;
 use App\Livewire\RawMaterials\MaterialStorageHome;
 use App\Livewire\Requisition\WeeklyRequisitionHome;
 use App\Livewire\RawMaterials\IngredientsStorageEdit;
@@ -42,15 +42,10 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 	// Dash/Dashboard
 	Route::get('/', Dashboard::class)->name('home');
 
+	// Farm Information
 	Route::prefix('/farm-information')->name('farm.information.')->group(function(){
-		Route::get('/', [FarmInfoController::class, 'index'])->name('home');
 		Route::get('/farm', FarmHome::class)->name('farm');
-		Route::get('/farm/create', FarmCreate::class)->name('farm.create');
-		// Route::get('/location', FarmLocationHome::class)->name('location');
-		// Route::get('/location/create', FarmLocationCreate::class)->name('location.create');
-
-		Route::get('/farm/{id}/edit', FarmEdit::class)->name('farm.edit');
-		// Route::get('/farm/location/{id}/edit', FarmLocationEdit::class)->name('location.edit');
+		Route::get('/farm-location', FarmLocationHome::class)->name('location');
 	});
 	Route::prefix('/settings')->name('settings.')->group(function(){
 		//Accounts
