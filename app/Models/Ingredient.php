@@ -18,4 +18,15 @@ class Ingredient extends Model
         'date',
         'active_status',
     ];
+
+    public function material()
+    {
+        return $this->belongsTo(Material::class, 'material_id');
+    }
+
+    public function feedType()
+    {
+        return $this->belongsTo(FeedType::class, 'feed_type_id');
+    }
+
 }

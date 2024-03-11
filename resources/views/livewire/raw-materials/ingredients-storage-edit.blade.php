@@ -17,13 +17,28 @@
     </div>
     <x-tabs selected="table-tab">
         <x-tab name="table-tab" label="List" icon="o-list-bullet">
-          <x-datepicker label="Date" wire:model="listDate" icon="o-calendar" :config="$config" inline />
-          <x-table :headers="$ingridientsheaders" :rows="$material" striped  />
+            <x-datepicker label="Date" wire:model.live="listDate" icon="o-calendar" :config="$config" />
+            <x-table :headers="[['key' => 'farm_name', 'label' => 'Farm', 'class' => 'text-neutral']]" :rows="$farms" wire:model="expanded" expandable >
+                {{-- Special `expansion` slot --}}
+                @scope('expansion', $farm, $ingredientHeaders)
+                    <div class="bg-base-200 p-8 font-bold">
+                            @foreach ($farm->feedTypes ?? [] as $feedType)
+                                {{-- @dd($feedType->ingredients) --}}
+                                {{-- @if ($farm->ingredients->contains('id', $feedType->id)) --}}
+                                    <x-table :headers="$ingredientHeaders" :rows="$feedType->ingredients ?? []"  />
+                                {{-- @endif --}}
+
+                            @endforeach
+                    </div>
+                @endscope
+                
+            </x-table>
         </x-tab>
+        {{-- Create New Ingredients Tab --}}
         <x-tab name="create-tab" label="Create New" icon="o-sparkles">
             {{-- Calendar-Date --}}
             <div class=" w-48">
-                <x-datetime label="Date" wire:model.live="inv_date" icon="o-calendar" inline />
+                <x-datetime label="New Date" wire:model.live="inv_date" icon="o-calendar" />
             </div>
             {{-- Ingredients Storage --}}
             <div>

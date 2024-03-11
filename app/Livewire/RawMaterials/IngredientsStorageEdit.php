@@ -5,21 +5,26 @@ namespace App\Livewire\RawMaterials;
 use App\Models\Farm;
 use Livewire\Component;
 use App\Models\FeedType;
-use App\Models\Ingredient;
 use App\Models\Material;
+use App\Models\Ingredient;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 
 class IngredientsStorageEdit extends Component
 {
 
+    public array $expanded = [];
 
-    public $ingridientsheaders;
+    public $ingredientHeaders;
 
     public $material;
     public $inv_date;
 
     public $ingredents;
+    public $farmHeaders;
+
+    // For Table
+    public $listDate;
 
     public $farms;
 
@@ -67,11 +72,13 @@ class IngredientsStorageEdit extends Component
         $this->farms = Farm::where('active_status', 1)->get();
         $this->ingredents = collect(['item1' => []]);
         $this->inv_date = date('Y-m-d');
-        $this->ingridientsheaders = [
-            ['key' => 'id', 'label' => '#', 'class' => 'text-neutral'],
-            ['key' => 'material_name', 'label' => 'Ingridients', 'class' => 'text-neutral'],
-            ['key' => 'category', 'label' => 'Price', 'class' => 'text-neutral'],
+        $this->ingredientHeaders = [
+            ['key' => 'feedType.feed_type_name', 'label' => 'Feed Type', 'class' => 'text-neutral'],
+            ['key' => 'standard', 'label' => 'Standard', 'class' => 'text-neutral'],
+            ['key' => 'batch', 'label' => 'Batch', 'class' => 'text-neutral'],
+            ['key' => 'adjustment', 'label' => 'Adjustment', 'class' => 'text-neutral'],
         ];
+        $this->listDate = date('Y-m-d');
     }
 
     public function updated($propertyName)
@@ -105,6 +112,8 @@ class IngredientsStorageEdit extends Component
     }
     public function render()
     {
-        return view('livewire.raw-materials.ingredients-storage-edit');
+        return view('livewire.raw-materials.ingredients-storage-edit', [
+            'ingredentList' => Ingredient::where('material_id', $this->material->id)->where('date', $this->listDate)->get(),
+        ]);
     }
 }
