@@ -67,8 +67,8 @@ class Sidebar extends Component
                     ["name"=> "Quality Assurance", "link"=>route('record-management.quality-assurance-home')],
                     ["name"=> "DownTime", "link"=>route('record-management.downtime-home')],
                     // farm location and farm information
-                    ["name"=> "Farm Information", "link"=> ""],
-                    ["name"=> "Farm Location", "link"=> ""],
+                    ["name"=> "Farm Information", "link"=>route('farm.information.farm')],
+                    ["name"=> "Farm Location", "link"=>route('farm.information.location')],
                 )
             ],
 

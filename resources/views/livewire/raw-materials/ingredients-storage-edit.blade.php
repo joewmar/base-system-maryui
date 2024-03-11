@@ -11,7 +11,6 @@
     <div class=" w-48">
         <x-datetime label="Date" wire:model.live="inv_date" icon="o-calendar" inline />
     </div>
-
     {{-- Ingredients Storage --}}
     <div>
  @foreach ($ingredents as $ingredent)

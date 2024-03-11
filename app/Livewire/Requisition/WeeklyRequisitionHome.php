@@ -29,12 +29,21 @@ class WeeklyRequisitionHome extends Component
 
     public bool $editModal = false;
 
+    // public $requisitions;
+    public $weekheaders;
+
+
     public function mount()
     {
         $this->headers = [
             ['key' => 'id', 'label' => '#', 'class' => 'text-neutral'],
             ['key' => 'material_name', 'label' => 'Materials', 'class' => 'text-neutral'],
             ['key' => 'category', 'label' => 'Category', 'class' => 'text-neutral'],
+        ];
+        $this->weekheaders = [
+            ['key' => 'id', 'label' => '#', 'class' => 'text-neutral'],
+            ['key' => 'material_name', 'label' => 'Requisition Materials', 'class' => 'text-neutral'],
+            ['key' => 'category', 'label' => 'Price', 'class' => 'text-neutral'],
         ];
     }
     public function render()
