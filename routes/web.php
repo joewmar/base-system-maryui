@@ -70,7 +70,7 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 		// Route for Ingredients Storage
 		Route::prefix('/ingredients-storage')->name('ingredients-storage.')->group(function (){
 			Route::get('/', IngredientsStorageHome::class)->name('home');
-			Route::get('/edit', IngredientsStorageEdit::class)->name('edit');
+			Route::get('/{id}/edit', IngredientsStorageEdit::class)->name('edit');
 		});
 		// For Material Storage
 		Route::get('material-storage', MaterialStorageHome::class)->name('material-storage-home');
