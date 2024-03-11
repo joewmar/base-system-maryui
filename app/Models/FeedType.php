@@ -11,5 +11,11 @@ class FeedType extends Model
 
     protected $fillable = [
         'feed_type_name',
+        'farm_id',
+        'active_status',
     ];
+    public function farm()
+    {
+        return $this->belongsTo(Farm::class, 'farm_id');
+    }
 }

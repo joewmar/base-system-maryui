@@ -14,7 +14,8 @@ class IngredientsStorageHome extends Component
 
     public $search;
     public $headers;
-
+    public $filterCategory = '';
+    
     public function mount()
     {
         $this->headers = [
@@ -24,8 +25,10 @@ class IngredientsStorageHome extends Component
         ];
     }
 
+
     public function render()
     {
-        return view('livewire.raw-materials.ingredients-storage-home', ['materials' => DB::table('materials')->where('active_status', 1)->where('material_name', 'like', '%' . $this->search . '%')->orderBy(...array_values($this->sortBy))->paginate(5)]);
+        $data = DB::table('materials')->where('active_status', 1)->where('material_name', 'like', '%' . $this->search . '%')->where('category', 'like', '%' . $this->filterCategory . '%')->orderBy(...array_values($this->sortBy))->paginate(5);
+        return view('livewire.raw-materials.ingredients-storage-home', ['materials' => $data]);
     }
 }

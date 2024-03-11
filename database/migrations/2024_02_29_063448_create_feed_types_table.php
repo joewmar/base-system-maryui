@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('feed_types', function (Blueprint $table) {
             $table->id();
             $table->string('feed_type_name');
+            $table->bigInteger('farm_id')->unsigned()->nullable();
+            $table->foreign('farm_id')->references('id')->on('farms');
             $table->boolean('active_status')->default(1);
             $table->timestamps();
         });

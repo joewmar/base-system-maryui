@@ -13,9 +13,9 @@
 
     {{-- Search and Add Button --}}
     <div class="flex justify-between items-center my-5 p-3 ">
-        <div><x-input label="Search" inline icon="o-magnifying-glass" type="search" /></div>
+        <div><x-input label="Search" inline icon="o-magnifying-glass" type="search" wire:model.live="search" /></div>
         <div>
-            <x-button label="Add" @click="$wire.addModal = true" />
+            <x-button icon="o-plus" label="Add" @click="$wire.addModal = true" class="btn-primary" />
         </div>
     </div>
 
@@ -42,7 +42,6 @@
     {{-- Add Modal --}}
     <x-modal wire:model="addModal" title="Add Material" separator>
         <div class="space-y-3">
-            <x-process-dialog target="editModal" />
             <x-input label="Material" wire:model.live='materialName' inline />
             <x-select label="Category" icon="o-user" option-value="key" option-label="label" placeholder="Select Category" placeholder-value="" inline :options="[['key' => 'macro', 'label' => 'Macro'], ['key' => 'micro', 'label' => 'Micro'], ['key' => 'medicine', 'label' => 'Medicine']]" wire:model.live="category" />
         </div>
@@ -54,8 +53,10 @@
         </x-slot:actions>
     </x-modal>
     {{-- Edit Modal --}}
-    <x-modal wire:model="editModal" title="Edit Material: {{$editMatRefName}}" separator persistent >
+    <x-modal wire:model="editModal" title="{{$editMatRefName}}" separator persistent >
         <div class="space-y-3">
+            <x-process-dialog target="editModal" />
+
             <x-input label="Material" wire:model.live='editMaterialName' inline />
             <x-select label="Category" icon="o-user" option-value="key" option-label="label" placeholder="Select Category" placeholder-value="" inline :options="[['key' => 'macro', 'label' => 'Macro'], ['key' => 'micro', 'label' => 'Micro'], ['key' => 'medicine', 'label' => 'Medicine']]" wire:model.live="editCategory" />
         </div>

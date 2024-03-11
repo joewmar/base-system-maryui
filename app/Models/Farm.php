@@ -16,4 +16,8 @@ class Farm extends Model
     {
         return $this->hasMany(FarmLocation::class, 'farm_id', 'id');
     }
+    public function feedTypes()
+    {
+        return $this->hasMany(FeedType::class, 'farm_id', 'id');
+    }
 }

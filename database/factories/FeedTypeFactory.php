@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Farm;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 
@@ -17,8 +18,10 @@ class FeedTypeFactory extends Factory
      */
     public function definition(): array
     {
+        $farmIDs = Farm::all()->pluck('id')->toArray();
         return [
             'feed_type_name' => fake()->word(),
+            'farm_id' => fake()->randomElement($farmIDs),
         ];
     }
 }
