@@ -6,10 +6,21 @@
     <div class="p-4 text-center font-bold text-3xl">
         <h3>Weekly Requisition</h3>
     </div>
+    {{-- Tabs --}}
     <x-tabs selected="table-tab">
         <x-tab name="table-tab" label="Show List" icon="o-list-bullet">
-            <div>Table for Requisition</div>
-            
+            <div class="font-semibold ">Table for Requisition</div>
+            {{-- Date and Search Button --}}
+            <div class="w-fit pt-2">
+                <x-input label="Search" inline icon="o-magnifying-glass" wire:model="search" type="search" >
+                    <x-slot:prepend>
+                        <x-datepicker class="rounded-r-none w-12 " wire:model="myDate1" inline />
+                    </x-slot:prepend>
+                </x-input>
+            </div>
+            {{-- Table for Requisition --}}
+            {{-- need database!!! --}}
+            <x-table :headers="$weekheaders" :rows="$weeklyOrders" striped />
         </x-tab>
         <x-tab name="add-tab" label="Create New" icon="c-archive-box">
              {{-- Search Button --}}
