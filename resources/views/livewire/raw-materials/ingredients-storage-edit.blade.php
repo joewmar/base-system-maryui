@@ -10,6 +10,7 @@
     <x-tabs selected="table-tab">
         <x-tab name="table-tab" label="List" icon="o-list-bullet">
             <div>Table</div>
+        <x-table :headers="$ingridientsheaders" :rows="$material" striped  />
         </x-tab>
         <x-tab name="create-tab" label="Create New" icon="o-sparkles">
             {{-- Calendar-Date --}}

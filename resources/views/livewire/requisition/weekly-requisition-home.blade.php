@@ -15,7 +15,7 @@
                 <x-input label="Search" inline icon="o-magnifying-glass" wire:model="search" type="search" >
                     <x-slot:prepend>
                         <x-datepicker class="rounded-r-none w-12 " wire:model="myDate1" inline />
-                    </x-slot:prepend>
+                    </x-slot:prepend>   
                 </x-input>
             </div>
             {{-- Table for Requisition --}}
