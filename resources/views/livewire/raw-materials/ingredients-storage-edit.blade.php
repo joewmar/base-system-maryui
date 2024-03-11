@@ -1,5 +1,13 @@
 @section('title') Edit Ingredients Storage @endsection
 @include('partials.edit-modal')
+@push('styles')
+    {{-- Flatpickr  --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+@endpush
+@php
+    $config = ['altFormat' => 'F j, Y', 'dateFormat' => 'Y-m-d'];
+@endphp
 <div class="h-fit m-5">
     <div class="pt-12 w-full h-full flex flex-col space-y-10 justify-center items-start">
         <x-button icon="o-arrow-left" class="btn-circle btn-ghost" link="{{route('raw-materials.ingredients-storage.home')}}"  />
@@ -9,8 +17,8 @@
     </div>
     <x-tabs selected="table-tab">
         <x-tab name="table-tab" label="List" icon="o-list-bullet">
-            <div>Table</div>
-        <x-table :headers="$ingridientsheaders" :rows="$material" striped  />
+          <x-datepicker label="Date" wire:model="listDate" icon="o-calendar" :config="$config" inline />
+          <x-table :headers="$ingridientsheaders" :rows="$material" striped  />
         </x-tab>
         <x-tab name="create-tab" label="Create New" icon="o-sparkles">
             {{-- Calendar-Date --}}

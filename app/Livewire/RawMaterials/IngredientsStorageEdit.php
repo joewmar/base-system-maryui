@@ -41,10 +41,10 @@ class IngredientsStorageEdit extends Component
     public function save()
     {
         $this->validate();
-        dd($this->ingredents);
+        // dd($this->ingredents);
         foreach ($this->ingredents as $key => $item) {
-            foreach ($item['feed_types'] as $feedkey => $feed) {
-                $created = Ingredient::create([
+            foreach ($item['feed_types'] as $feed) {
+                Ingredient::create([
                     'material_id' => $this->material->id,
                     'feed_type_id' => decrypt($feed['id']),
                     'standard' => $feed['standard'] ?? 0,
@@ -57,7 +57,7 @@ class IngredientsStorageEdit extends Component
             }
         }
         session()->flash('success', 'Ingredients Stored Successfully');
-        $this->redirect(route('raw-materials.ingredients-storage-home', $this->material->id));
+        $this->redirect(route('raw-materials.ingredients-storage.edit', $this->material->id));
         dd($this->ingredents);
     }
 
@@ -80,7 +80,7 @@ class IngredientsStorageEdit extends Component
             if(isset($item['farm_id']) && !empty($item['farm_id'])) {
                 $farm = Farm::find($item['farm_id']);
                 foreach($farm->feedTypes ?? [] as $key => $feedType){
-                    $item['feed_types']['ft'.$key+1]['id'] = encrypt($feedType->feed_type_name);
+                    $item['feed_types']['ft'.$key+1]['id'] = encrypt($feedType->id);
                     $item['feed_types']['ft'.$key+1]['name'] = $feedType->feed_type_name;
                 }
             }
