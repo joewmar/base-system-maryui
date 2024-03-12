@@ -1,4 +1,7 @@
 @section('title') Quality Assurance @endsection
+@include('partials.create-modal')
+@include('partials.edit-modal')
+
 <div class="h-fit m-5">
     <div class="pt-12 w-full h-full flex flex-col space-y-10 justify-center items-start">
         <x-button icon="o-arrow-left" class="btn-circle btn-ghost" link="" />
@@ -9,7 +12,7 @@
     {{-- Search and Add Button --}}
     <div class="flex justify-between my-5 p-3 ">
         <div>
-            <x-input label="Search" inline icon="o-magnifying-glass" type="search" class="input-sm" />
+            <x-input label="Search" wire:model.live="search" inline icon="o-magnifying-glass" type="search" class="input-sm" />
         </div>
         <div>
             <x-button label="Add" class="btn-primary text-sm" icon="m-plus-small" @click="$wire.addModal = true" />
@@ -19,7 +22,7 @@
     <x-table :headers="$headers" :rows="$qualityAssurances" striped with-pagination  >
         @scope('actions', $qualityAssurance)
             <div class="flex justify-around w-full space-x-2">
-                <x-button tooltip="Edit" icon="o-pencil-square" class="bg-green-500 btn-sm" @click="$wire.editModal = true" />
+                <x-button tooltip="Edit" icon="o-pencil-square" class="bg-green-500 btn-sm" @click="$wire.editModal = true; $wire.edit('{{encrypt($qualityAssurance->id)}}')" />
                 <x-button icon="o-trash" tooltip="Remove" class="bg-red-500 btn-sm" onclick="deleteModal('{{encrypt($qualityAssurance->id)}}', '{{$qualityAssurance->description}}')" />
             </div>
         @endscope
@@ -31,8 +34,8 @@
         <div><x-input label="Code" wire:model.live='code' inline /></div>
         </div>
         <x-slot:actions>
+            <x-button label="Confirm" class="btn-primary" onclick="createModal('add', 'Do you want to add this material', 'add')" />
             <x-button label="Cancel" @click="$wire.addModal = false" />
-            <x-button label="Confirm" class="btn-primary" />
         </x-slot:actions>
     </x-modal>
         {{-- Edit Modal --}}
@@ -41,9 +44,10 @@
             <div><x-input label="Description" wire:model.live='editdescription' inline /></div>
             <div><x-input label="Code" wire:model.live='editcode' inline /></div>
             </div>
+            <x-process-dialog target="editModal" />
             <x-slot:actions>
+                <x-button label="Update"  class="bg-green-500 hover:bg-green-600" icon="c-pencil-square" onclick="editModal('{{$qa_id}}')" />
                 <x-button label="Cancel" @click="$wire.editModal = false" />
-                <x-button label="Update"  class="bg-green-500 hover:bg-green-600" icon="c-pencil-square" />
             </x-slot:actions>
         </x-modal>
     {{-- DELETE MODAL --}}
