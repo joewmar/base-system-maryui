@@ -21,9 +21,9 @@ class ElectricCostHome extends Component
     public $headers;
 
     // for add modal
-    #[Rule('required|unique:electric_costs,date')]
+    #[Rule('required')]
     public $date;
-    #[Rule('required|unique:electric_costs,electric_cost')]
+    #[Rule('required')]
     public $electric_cost;
     public bool $addModal = false;
 
@@ -49,8 +49,8 @@ class ElectricCostHome extends Component
     public function add()
     {
         $validatedData = $this->validate([
-            'date' => 'required|unique:electric_costs,date',
-            'electric_cost' => 'required|unique:electric_costs,electric_cost',
+            'date' => 'required',
+            'electric_cost' => 'required',
         ]);
         ElectricCost::create([
             'date' => $this->date . '-' . date('d'),
