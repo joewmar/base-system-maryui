@@ -83,12 +83,12 @@
                         {{-- <hr class="col-span-5"> --}}
                         @foreach ($ingredent['feed_types'] ?? [] as $feedkey => $feed)
                             <x-input inline disabled wire:model.live="ingredents.{{$ingridentkey}}.feed_types.{{$feedkey}}.name" />
-                            <x-input label="Standard" inline wire:model.live="ingredents.{{$ingridentkey}}.feed_types.{{$feedkey}}.standard" />
-                            <x-input label="Batch" inline wire:model.live="ingredents.{{$ingridentkey}}.feed_types.{{$feedkey}}.batch"  />
-                            <x-input label="Adjustment" inline wire:model.live="ingredents.{{$ingridentkey}}.feed_types.{{$feedkey}}.adjusment" />
-                            <div class="flex justify-center pt-4">
+                            <x-input type="number" label="Standard" inline wire:model.live="ingredents.{{$ingridentkey}}.feed_types.{{$feedkey}}.standard" />
+                            <x-input type="number" label="Batch" inline wire:model.live="ingredents.{{$ingridentkey}}.feed_types.{{$feedkey}}.batch"  />
+                            <x-input type="number" label="Adjustment" inline wire:model.live="ingredents.{{$ingridentkey}}.feed_types.{{$feedkey}}.adjusment" />
+                            {{-- <div class="flex justify-center pt-4">
                                 <x-checkbox wire:model.live="ingredents.{{$ingridentkey}}.feed_types.{{$feedkey}}.enabled" />
-                            </div>
+                            </div> --}}
                         @endforeach
 
                     </div >

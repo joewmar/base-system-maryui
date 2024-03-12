@@ -27,7 +27,6 @@ class WeeklyRequisitionHome extends Component
     #[Rule('required')]
     public $standard_days;
 
-    public bool $editModal = false;
 
     // public $requisitions;
     public $weekheaders;

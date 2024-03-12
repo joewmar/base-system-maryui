@@ -30,6 +30,7 @@ use App\Livewire\Requisition\WeeklyRequisitionHome;
 use App\Livewire\RawMaterials\IngredientsStorageEdit;
 use App\Livewire\RawMaterials\IngredientsStorageHome;
 use App\Livewire\RecordManagement\QualityAssuranceHome;
+use App\Livewire\Requisition\WeeklyRequisitionEdit;
 
 // Fixed Route for all new application that will use Auth
 Route::get('/app-login/{id}', [AuthenticationController::class, 'app_login'])->name('app.login');
@@ -92,6 +93,7 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 	Route::prefix('/requisition')->name('requisition.')->group(function(){
 		// Requisition
 		Route::get('/weeekly-requisition', WeeklyRequisitionHome::class)->name('weekly-requisition-home');
+		Route::get('/weeekly-requisition/{id}/order', WeeklyRequisitionEdit::class)->name('weekly-requisition-order');
 	});
 	/**
 	 * YOUR CODE STARTS HERE
