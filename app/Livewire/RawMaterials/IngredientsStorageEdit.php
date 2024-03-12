@@ -49,21 +49,25 @@ class IngredientsStorageEdit extends Component
         // dd($this->ingredents);
         foreach ($this->ingredents as $key => $item) {
             foreach ($item['feed_types'] as $feed) {
-                Ingredient::create([
-                    'material_id' => $this->material->id,
-                    'feed_type_id' => decrypt($feed['id']),
-                    'standard' => $feed['standard'] ?? 0,
-                    'batch' => $feed['batch'] ?? 0,
-                    'adjustment' => $feed['adjustment'] ?? 0,
-                    'date' => $this->inv_date,
-
-                ]);
-                    
+                Ingredient::updateOrCreate(
+                    [
+                        'material_id' => $this->material->id, 
+                        'feed_type_id' => decrypt($feed['id']),
+                        'date' => $this->inv_date,
+                    ],
+                    [
+                        'material_id' => $this->material->id,
+                        'feed_type_id' => decrypt($feed['id']),
+                        'standard' => $feed['standard'] ?? 0,
+                        'batch' => $feed['batch'] ?? 0,
+                        'adjustment' => $feed['adjustment'] ?? 0,
+                        'date' => $this->inv_date,
+                    ]
+                );       
             }
         }
         session()->flash('success', 'Ingredients Stored Successfully');
-        $this->redirect(route('raw-materials.ingredients-storage.edit', $this->material->id));
-        dd($this->ingredents);
+        $this->redirect(route('raw-materials.ingredients-storage.edit', encrypt($this->material->id)));
     }
 
     public function mount(string $id)
@@ -80,8 +84,7 @@ class IngredientsStorageEdit extends Component
         ];
         $this->listDate = date('Y-m-d');
     }
-
-    public function updated($propertyName)
+    public function updatedIngredents()
     {
         $this->ingredents = $this->ingredents->map(function (array $item, string $key) {
             if(isset($item['farm_id']) && !empty($item['farm_id'])) {
@@ -93,6 +96,9 @@ class IngredientsStorageEdit extends Component
             }
             return $item;
         });
+    }
+    public function updated($propertyName)
+    {
         $this->validateOnly($propertyName);
     }
     public function removeItem(string $id)

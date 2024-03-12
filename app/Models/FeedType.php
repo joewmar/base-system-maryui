@@ -18,8 +18,8 @@ class FeedType extends Model
     {
         return $this->belongsTo(Farm::class, 'farm_id');
     }
-    public function ingredients()
-    {
-        return $this->hasMany(Ingredient::class, 'id');
-    }
+    // public function ingredients()
+    // {
+    //     return $this->hasMany(Ingredient::class, 'id');
+    // }
 }

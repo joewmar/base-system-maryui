@@ -18,17 +18,38 @@
     <x-tabs selected="table-tab">
         <x-tab name="table-tab" label="List" icon="o-list-bullet">
             <x-datepicker label="Date" wire:model.live="listDate" icon="o-calendar" :config="$config" />
+            <x-process-dialog target="listDate" />
             <x-table :headers="[['key' => 'farm_name', 'label' => 'Farm', 'class' => 'text-neutral']]" :rows="$farms" wire:model="expanded" expandable >
                 {{-- Special `expansion` slot --}}
-                @scope('expansion', $farm, $ingredientHeaders)
-                    <div class="bg-base-200 p-8 font-bold">
-                            @foreach ($farm->feedTypes ?? [] as $feedType)
-                                {{-- @dd($feedType->ingredients) --}}
-                                {{-- @if ($farm->ingredients->contains('id', $feedType->id)) --}}
-                                    <x-table :headers="$ingredientHeaders" :rows="$feedType->ingredients ?? []"  />
-                                {{-- @endif --}}
-
-                            @endforeach
+                @scope('expansion', $farm, $ingredentList)
+                    <div class="overflow-x-auto bg-base-200 p-8 font-bold">
+                        <table class="table table-zebra">
+                            <!-- head -->
+                            <thead>
+                                <tr>
+                                    <th>Feed Type</th>
+                                    <th>Standard</th>
+                                    <th>Batch</th>
+                                    <th>T.BATCH</th>
+                                    <th>Adjusment</th>
+                                    <th>Usage</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($ingredentList as $ingredent)
+                                    @if($ingredent->feedType->farm_id == $farm->id)
+                                        <tr>
+                                            <th>{{$ingredent->feedType->feed_type_name}}</th>
+                                            <td>{{$ingredent->standard}}</td>
+                                            <td>{{$ingredent->batch}}</td>
+                                            <td>{{$ingredent->totalBatch()}}</td>
+                                            <td>{{$ingredent->adjustment}}</td>
+                                            <td>{{$ingredent->usage()}}</td>
+                                        </tr>
+                                    @endif
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                 @endscope
                 
@@ -38,9 +59,8 @@
         <x-tab name="create-tab" label="Create New" icon="o-sparkles">
             {{-- Calendar-Date --}}
             <div class=" w-48">
-                <x-datetime label="New Date" wire:model.live="inv_date" icon="o-calendar" />
+                <x-datepicker label="Date Created" wire:model.live="inv_date" icon="o-calendar" :config="$config" />
             </div>
-            {{-- Ingredients Storage --}}
             <div>
                 @foreach ($ingredents as $ingridentkey => $ingredent)
                     <div class="grid grid-cols-1 md:grid-cols-5 gap-4 pt-5 border-t-2 p-3 mt-5 border-primary" >
@@ -81,6 +101,4 @@
             </div>
         </x-tab>
     </x-tabs>
- 
-
 </div>

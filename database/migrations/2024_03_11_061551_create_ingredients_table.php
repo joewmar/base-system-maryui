@@ -18,9 +18,9 @@ return new class extends Migration
             $table->foreign('material_id')->references('id')->on('materials');
             $table->bigInteger('feed_type_id')->unsigned()->nullable();
             $table->foreign('feed_type_id')->references('id')->on('feed_types');
-            $table->float('standard')->default(0)->nullable();
-            $table->float('batch')->default(0)->nullable();
-            $table->float('adjustment')->default(0)->nullable();
+            $table->float('standard')->default(0);
+            $table->float('batch')->default(0);
+            $table->float('adjustment')->default(0);
             $table->boolean('active_status')->default(1);
             $table->timestamps();
         });
