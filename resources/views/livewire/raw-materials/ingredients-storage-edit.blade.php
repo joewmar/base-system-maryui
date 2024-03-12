@@ -58,47 +58,49 @@
         {{-- Create New Ingredients Tab --}}
         <x-tab name="create-tab" label="Create New" icon="o-sparkles">
             {{-- Calendar-Date --}}
-            <div class=" w-48">
-                <x-datepicker label="Date Created" wire:model.live="inv_date" icon="o-calendar" :config="$config" />
-            </div>
-            <div>
-                @foreach ($ingredents as $ingridentkey => $ingredent)
-                    <div class="grid grid-cols-1 md:grid-cols-5 gap-4 pt-5 border-t-2 p-3 mt-5 border-primary" >
-                        <div class="col-span-5 flex justify-start space-x-3">
-                            <x-select wire:model.live="ingredents.{{$ingridentkey}}.farm_id" label="Farm {{$loop->iteration}}" placeholder-value="" placeholder="Select Farm" :options="$farms" option-value="id" option-label="farm_name" inline />
-                            <div>
-                                {{-- Action Add Item and Delete  --}}
-                                @if (count($ingredents) > 1)
-                                    <x-button tooltip="Remove Item" icon="s-trash"  class="mt-1 btn-outline text-red-500 border-red-600 hover:bg-red-500" wire:click="removeItem('{{encrypt($ingridentkey)}}')" />
-                                @else
-                                    <x-button tooltip="Remove Item" icon="s-trash"  class="mt-1 btn-outline text-red-500 border-red-600 hover:bg-red-500" disabled />
+            <x-form>
+                <div class=" w-48">
+                    <x-datepicker label="Date Created" wire:model.live="inv_date" icon="o-calendar" :config="$config" />
+                </div>
+                <div>
+                    @foreach ($ingredents as $ingridentkey => $ingredent)
+                        <div class="grid grid-cols-1 md:grid-cols-5 gap-4 pt-5 border-t-2 p-3 mt-5 border-primary" >
+                            <div class="col-span-5 flex justify-start space-x-3">
+                                <x-select wire:model.live="ingredents.{{$ingridentkey}}.farm_id" label="Farm {{$loop->iteration}}" placeholder-value="" placeholder="Select Farm" :options="$farms" option-value="id" option-label="farm_name" inline />
+                                <div>
+                                    {{-- Action Add Item and Delete  --}}
+                                    @if (count($ingredents) > 1)
+                                        <x-button tooltip="Remove Item" icon="s-trash"  class="mt-1 btn-outline text-red-500 border-red-600 hover:bg-red-500" wire:click="removeItem('{{encrypt($ingridentkey)}}')" />
+                                    @else
+                                        <x-button tooltip="Remove Item" icon="s-trash"  class="mt-1 btn-outline text-red-500 border-red-600 hover:bg-red-500" disabled />
+                                    @endif
+                                @if ($loop->last)
+                                        <x-button tooltip="Add Item" icon="o-plus" class="btn-outline text-blue-600 border-blue-600 hover:bg-blue-700  text-sm" wire:click="addItem"  />
+                                @else 
+                                    <x-button tooltip="Add Item" icon="o-plus" class="btn-outline text-blue-600 border-blue-600 hover:bg-blue-700  text-sm" disabled />
                                 @endif
-                            @if ($loop->last)
-                                    <x-button tooltip="Add Item" icon="o-plus" class="btn-outline text-blue-600 border-blue-600 hover:bg-blue-700  text-sm" wire:click="addItem"  />
-                            @else 
-                                <x-button tooltip="Add Item" icon="o-plus" class="btn-outline text-blue-600 border-blue-600 hover:bg-blue-700  text-sm" disabled />
-                            @endif
+                                </div>
                             </div>
-                        </div>
-                        {{-- <hr class="col-span-5"> --}}
-                        @foreach ($ingredent['feed_types'] ?? [] as $feedkey => $feed)
-                            <x-input inline disabled wire:model.live="ingredents.{{$ingridentkey}}.feed_types.{{$feedkey}}.name" />
-                            <x-input type="number" label="Standard" inline wire:model.live="ingredents.{{$ingridentkey}}.feed_types.{{$feedkey}}.standard" />
-                            <x-input type="number" label="Batch" inline wire:model.live="ingredents.{{$ingridentkey}}.feed_types.{{$feedkey}}.batch"  />
-                            <x-input type="number" label="Adjustment" inline wire:model.live="ingredents.{{$ingridentkey}}.feed_types.{{$feedkey}}.adjusment" />
-                            {{-- <div class="flex justify-center pt-4">
-                                <x-checkbox wire:model.live="ingredents.{{$ingridentkey}}.feed_types.{{$feedkey}}.enabled" />
-                            </div> --}}
-                        @endforeach
+                            {{-- <hr class="col-span-5"> --}}
+                            @foreach ($ingredent['feed_types'] ?? [] as $feedkey => $feed)
+                                <x-input inline disabled wire:model.live="ingredents.{{$ingridentkey}}.feed_types.{{$feedkey}}.name" />
+                                <x-input type="number" label="Standard" inline wire:model.live="ingredents.{{$ingridentkey}}.feed_types.{{$feedkey}}.standard" />
+                                <x-input type="number" label="Batch" inline wire:model.live="ingredents.{{$ingridentkey}}.feed_types.{{$feedkey}}.batch"  />
+                                <x-input type="number" label="Adjustment" inline wire:model.live="ingredents.{{$ingridentkey}}.feed_types.{{$feedkey}}.adjusment" />
+                                {{-- <div class="flex justify-center pt-4">
+                                    <x-checkbox wire:model.live="ingredents.{{$ingridentkey}}.feed_types.{{$feedkey}}.enabled" />
+                                </div> --}}
+                            @endforeach
 
-                    </div >
-                    {{-- <hr> --}}
-                @endforeach
-            </div>
-            {{-- Action for Adding --}}
-            <div class="flex justify-end mt-5 mr-28 ">
-                <x-button label="Save" class="btn-outline text-blue-600 border-blue-600 hover:bg-blue-700  text-sm" icon="m-plus-small" onclick="editModal('{{encrypt($material->id)}}')" />
-            </div>
+                        </div >
+                        {{-- <hr> --}}
+                    @endforeach
+                </div>
+                {{-- Action for Adding --}}
+                <div class="flex justify-end mt-5 mr-28 ">
+                    <x-button label="Save" class="btn-outline text-blue-600 border-blue-600 hover:bg-blue-700  text-sm" icon="m-plus-small" onclick="editModal('{{encrypt($material->id)}}')" />
+                </div>
+            <x-form>
         </x-tab>
     </x-tabs>
 </div>

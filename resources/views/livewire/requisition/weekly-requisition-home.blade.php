@@ -8,8 +8,10 @@
     </div>
     {{-- Tabs --}}
         {{-- Search Button --}}
-    <div class="flex justify-start my-5 p-3 ">
+    <div class="flex justify-between items-center my-5 p-3 ">
         <div><x-input label="Search" inline icon="o-magnifying-glass" wire:model="search" type="search" class="input-sm" /></div>
+        <x-radio :options="[['key' => '', 'label' => 'All'], ['key' => 'macro', 'label' => 'Macro'], ['key' => 'micro', 'label' => 'Micro'], ['key' => 'medicine', 'label' => 'Medicine']]" option-value="key" option-label="label" wire:model.live="filterCategory" />
+
     </div>
     {{-- Table --}}
     <x-table :headers="$headers" :rows="$weeklyOrders" striped with-pagination>

@@ -13,7 +13,7 @@
         <x-button icon="o-arrow-left" class="btn-circle btn-ghost" link="{{route('requisition.weekly-requisition-home')}}"  />
     </div>
     <div class="p-4 text-center font-bold text-3xl">
-        <h3>{{$material->material_name}} Daily Inventory</h3>
+        <h3>{{Str::upper($material->material_name)}} Daily Inventory</h3>
     </div>
     {{-- Tabs --}}
     <x-tabs selected="table-tab">

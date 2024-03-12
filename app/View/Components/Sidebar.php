@@ -28,6 +28,7 @@ class Sidebar extends Component
                 "name" => "Requisition",
                 "sub" => array(
                     ["name" => "Weekly Order", "link" =>route("requisition.weekly-requisition-home")],
+                    ["name" => "Create Daily Inventory", "link" =>route("requisition.daily-inventory-create")],
                 )
             ],
             [
