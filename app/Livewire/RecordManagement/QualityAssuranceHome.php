@@ -20,7 +20,6 @@ class QualityAssuranceHome extends Component
 
     // Table
     public $headers;
-    #[Rule('required')]
 
     // for add modal
     #[Rule('required|unique:quality_assurances,description')]
@@ -30,10 +29,11 @@ class QualityAssuranceHome extends Component
     public bool $addModal = false;
 
     // for edit modal
-    #[Rule('required|unique:quality_assurances,description')]
+    #[Rule('required')]
     public $editdescription;
-    #[Rule('required|unique:quality_assurances,code')]
+    #[Rule('required')]
     public $editcode;
+    public $qa_id;
     public bool $editModal = false;
     public function mount()
     {
@@ -45,14 +45,30 @@ class QualityAssuranceHome extends Component
     }
 
     
-
+    #[On('add')]
     public function add()
     {
-        // $this->dispatch('success', ['message' => 'Record Added']);
+        $this->validate([
+            'description' => 'required|unique:quality_assurances,description',
+            'code' => 'required|unique:quality_assurances,code',
+        ]);
+        QualityAssurance::create([
+            'description' => $this->description,
+            'code' => $this->code,
+        ]);
 
-        session()->flash('error', 'Record Error Saved');
+        session()->flash('success', 'QualityAssurance successfully added');
         $this->redirect(route('record-management.quality-assurance-home'));
+    }
 
+    public function edit(string $id)
+    {
+        if($this->editModal){
+            $qualityassurance = QualityAssurance::findOrFail(decrypt($id));
+            $this->editdescription = $qualityassurance->description;
+            $this->editcode = $qualityassurance->code;
+            $this->qa_id = $id;
+        }
     }
     #[On('remove')] 
     public function remove(string $id)
@@ -61,7 +77,22 @@ class QualityAssuranceHome extends Component
         $qualityAssurance->active_status = 0;
         $qualityAssurance->save();
         session()->flash('success', ' qualityAssurance'.$qualityAssurance->description.' Successfully Deleted');
-        $this->redirect(route('raw-materials.material-storage-home',));
+        $this->redirect(route('record-management.quality-assurance-home',));
+    }
+
+    #[On('save')]
+    public function save(string $id)
+    {
+        $this->validate([
+            'editdescription' => 'required',
+        ]);
+        $description = QualityAssurance::findOrFail(decrypt($id));
+
+        $description->update([
+            'description' => $this->editdescription,
+        ]);
+        session()->flash('success', 'QualityAssurance Updated Successfully');
+        $this->redirect(route('record-management.quality-assurance-home'));
     }
 
     public function updatingSearch()

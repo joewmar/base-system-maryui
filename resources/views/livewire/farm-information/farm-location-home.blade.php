@@ -65,7 +65,6 @@
             <x-input label="Farm Location" inline wire:model.live="edit_farm_location"  />
         </div>
         <x-process-dialog target="editModal" />
-
         <x-slot:actions>
             <x-button label="Yes" class="btn-primary" onclick="editModal('{{$edit_farm_loc_id}}')" />
             <x-button label="No" @click="$wire.editModal = false" />
