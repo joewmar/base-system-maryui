@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         User::factory(10)->create();
         Material::factory(10)->create();
         FeedType::factory(10)->create();
-        ElectricCost::factory(10)->create();
+        // ElectricCost::factory(10)->create();
         QualityAssurance::factory(10)->create();
         Downtime::factory(10)->create();
     }

@@ -17,7 +17,7 @@ class ElectricCostFactory extends Factory
     public function definition(): array
     {
         return [
-            'date' => fake()->date(),
+            'date' => fake()->dateTimeBetween('now', '+1 year'),
             'electric_cost' => fake()->numberBetween(0, 1000),
         ];
     }

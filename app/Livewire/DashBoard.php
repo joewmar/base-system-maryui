@@ -3,11 +3,12 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-
+use App\Models\ElectricCost;
+use Illuminate\Support\Carbon;
+use Maatwebsite\Excel\Concerns\ToArray;
 
 class DashBoard extends Component
 {
-
     public array $Toonageperday = [
         'type' => 'bar',
         'data' => [
@@ -118,17 +119,28 @@ class DashBoard extends Component
         ]
     ];
 
-    public array $ElectricCost = [
-        'type' => 'bar',
-        'data' => [
-            'labels' => ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            'datasets' => [
-                [
-                    'label' => 'Electric Cost',
+    public array $ElectricCost;
+
+    public function mount()
+    {   
+        $covertMonth = function ($date) {
+            return Carbon::createFromFormat('Y-m-d', $date)->format('M');
+        };
+
+        $electricBills = ElectricCost::whereYear('date', date('Y'))->where('active_status', 1)->orderBy('date', 'ASC');
+        $this->ElectricCost  = [
+            'type' => 'bar',
+            'data' => [
+                'labels' => array_map($covertMonth, $electricBills->pluck('date')->toArray()) ,
+                'datasets' => [
+                    [
+                        'label' => 'Electric Cost 2024',
+                        'data' => $electricBills->pluck('electric_cost')->toArray(),
+                    ]
                 ]
             ]
-        ]
-    ];
+        ];
+    }
 
     public function render()
     {

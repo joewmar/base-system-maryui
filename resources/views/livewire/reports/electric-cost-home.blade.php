@@ -27,7 +27,7 @@
     {{-- Table --}}
     <x-table :headers="$headers" :rows="$ElectricCosts" :sort-by="$sortBy" selectable with-pagination >
         @scope('cell_date', $date)
-            {{\Carbon\Carbon::parse($date->date)->format('F')}}
+            {{\Carbon\Carbon::parse($date->date)->format('F Y')}}
         @endscope
         @scope('cell_electric_cost', $cost)
             {{number_format($cost->electric_cost, 2)}}
