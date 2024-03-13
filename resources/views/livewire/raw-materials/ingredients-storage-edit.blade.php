@@ -100,7 +100,7 @@
                 <div class="flex justify-end mt-5 mr-28 ">
                     <x-button label="Save" class="btn-outline text-blue-600 border-blue-600 hover:bg-blue-700  text-sm" icon="m-plus-small" onclick="editModal('{{encrypt($material->id)}}')" />
                 </div>
-            <x-form>
+            </x-form>
         </x-tab>
     </x-tabs>
 </div>

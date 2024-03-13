@@ -51,6 +51,6 @@
         <div class="flex justify-start my-5 p-3 "><div><x-button label="Save" onclick="createModal('add', 'Do you want add this inventory', 'add')" class="btn-primary" icon="o-plus" /></div></div>
 
     </x-form>
-        {{-- Create Form --}}
+    {{-- Create Form --}}
 
 </div>

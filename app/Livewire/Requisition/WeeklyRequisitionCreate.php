@@ -22,7 +22,7 @@ class WeeklyRequisitionCreate extends Component
 
       protected $rules = [
           'addDate' => 'required|date',
-          'no_of_working' => 'required|numeric',
+          'no_of_working' => 'required|numeric|same',
           'inventories.*.material_id' => 'required',
           'inventories.*.price_per_kg' => 'required|numeric',
           'inventories.*.inventory_cost' => 'required|numeric',
@@ -50,6 +50,10 @@ class WeeklyRequisitionCreate extends Component
       {
             unset($this->inventories[decrypt($id)]);
       }
+      public function updatedMaterials()
+      {
+        
+      }
       public function addItem()
       {
           $lastIndex = 1;
@@ -64,7 +68,6 @@ class WeeklyRequisitionCreate extends Component
       #[On('add')]
       public function add()
       {
-        dd($this->inventories);
           $this->validate();
         foreach($this->inventories as $inventory){
             WeeklyOrder::create([
