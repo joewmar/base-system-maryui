@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Downtime;
+use App\Models\Production;
 use App\Livewire\Dashboard;
 use App\Models\QualityAssurance;
 use Illuminate\Support\Facades\Route;
@@ -26,12 +27,13 @@ use App\Livewire\DeliveryManagement\ScheduleHome;
 use App\Http\Controllers\AuthenticationController;
 use App\Livewire\FarmInformation\FarmLocationHome;
 use App\Livewire\RawMaterials\MaterialStorageHome;
+use App\Livewire\Requisition\WeeklyRequisitionEdit;
 use App\Livewire\Requisition\WeeklyRequisitionHome;
 use App\Livewire\RawMaterials\IngredientsStorageEdit;
 use App\Livewire\RawMaterials\IngredientsStorageHome;
-use App\Livewire\RecordManagement\QualityAssuranceHome;
 use App\Livewire\Requisition\WeeklyRequisitionCreate;
-use App\Livewire\Requisition\WeeklyRequisitionEdit;
+use App\Livewire\RecordManagement\QualityAssuranceHome;
+use App\Livewire\ProductionManagement\ProductionOrderHome;
 
 // Fixed Route for all new application that will use Auth
 Route::get('/app-login/{id}', [AuthenticationController::class, 'app_login'])->name('app.login');
@@ -96,6 +98,12 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 		Route::get('/weekly-requisition', WeeklyRequisitionHome::class)->name('weekly-requisition-home');
 		Route::get('/weekly-requisition/{id}/order', WeeklyRequisitionEdit::class)->name('weekly-requisition-order');
 		Route::get('/daily-inventory/create', WeeklyRequisitionCreate::class)->name('daily-inventory-create');
+	});
+
+	Route::prefix('/production-management')->name('production-management.')->group(function(){
+		// Production-Management
+		// route for production order
+		Route::get('/production-order', ProductionOrderHome::class)->name('production-order-home');
 	});
 	/**
 	 * YOUR CODE STARTS HERE

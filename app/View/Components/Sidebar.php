@@ -50,7 +50,7 @@ class Sidebar extends Component
                 "name" => "Production Management",
                 "sub" => array (
                     ["name"=> "Premixes","link"=> ""],
-                    ["name"=> "Production Order", "link"=> ""],
+                    ["name"=> "Production Order", "link"=>route("production-management.production-order-home")],
                     ["name"=> "Feed Information", "link"=> ""],
                 )
             ],
