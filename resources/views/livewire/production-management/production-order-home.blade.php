@@ -32,6 +32,7 @@
             <div class="grid grid-cols-1 md:grid-cols-5 gap-4 pt-5 border-t-2 p-3 mt-5 border-primary">
                 <div class="col-span-5 flex justify-start space-x-3">
                 <x-select
+                    inline
                     label="Alternative"
                     {{-- :options="$users" --}}
                     option-value="custom_key"
@@ -40,7 +41,7 @@
                     placeholder-value="0" {{-- Set a value for placeholder. Default is `null` --}}
                     wire:model="selectedUser2" />
                     <x-button tooltip="Remove Item" icon="s-trash"  class="mt-1 btn-outline text-red-500 border-red-600 hover:bg-red-500" wire:click="removeItem" />
-                    <x-button tooltip="Add Item" icon="o-plus" class="btn-outline text-blue-600 border-blue-600 hover:bg-blue-700  text-sm" wire:click="addItem"  />
+                    <x-button tooltip="Add Item" icon="o-plus" class=" mt-1 btn-outline text-blue-600 border-blue-600 hover:bg-blue-700  text-sm" wire:click="addItem"  />
                 </div>
             </div>
 
