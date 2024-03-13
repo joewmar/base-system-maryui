@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('productions', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            $table->feed_type_id('feed_type_id')->unsigned()->nullable();
+            $table->bigInteger('feed_type_id')->unsigned()->nullable();
             $table->time('runtime_start');
             $table->time('runtime_end');
             $table->integer('tons_produced');

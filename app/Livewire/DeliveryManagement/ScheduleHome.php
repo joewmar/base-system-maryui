@@ -3,36 +3,40 @@
 namespace App\Livewire\DeliveryManagement;
 
 use Livewire\Component;
+use Illuminate\Http\Request;
 
 class ScheduleHome extends Component
 {
-    public $events;
-
-    public function mount()
+    public function index(Request $request)
     {
-        $this->events = [
-            [
-                'label' => 'Day off',
-                'description' => 'Playing <u>tennis.</u>',
-                'css' => '!bg-amber-200',
-                'date' => now()->startOfMonth()->addDays(3),
-            ],
-            [
-                'label' => 'Health',
-                'description' => 'I am sick',
-                'css' => '!bg-green-200',
-                'date' => now()->startOfMonth()->addDays(8),
-            ],
-            [
-                'label' => 'Laracon',
-                'description' => 'Let`s go!',
-                'css' => '!bg-blue-200',
-                'range' => [
-                    now()->startOfMonth()->addDays(13),
-                    now()->startOfMonth()->addDays(15)
-                ]
-            ],
-        ];
+        if($request->ajax()) {
+            $events = ScheduleHome::all(); // Fetch all events
+            return response()->json($events);
+        }
+    }
+
+    public function ajax(Request $request)
+    {
+        if ($request->type == 'add') {
+            $event = ScheduleHome::create([
+                'title' => $request->title,
+                'start' => $request->start,
+                'end' => $request->end,
+            ]);
+            return response()->json($event);
+        } else if ($request->type == 'update') {
+            $event = ScheduleHome::findOrFail($request->id); // Find the event
+            $event->update([
+                'title' => $request->title,
+                'start' => $request->start,
+                'end' => $request->end,
+            ]);
+            return response()->json($event);
+        } else if ($request->type == 'delete') {
+            $event = ScheduleHome::findOrFail($request->id); // Find the event
+            $event->delete();
+            return response()->json(['status' => 'success']);
+        }
     }
     public function render()
     {

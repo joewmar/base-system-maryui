@@ -7,12 +7,12 @@
         <x-tab name="table-tab" label="List" icon="o-list-bullet">
             <x-datepicker label="Date" wire:model="listDate" icon="o-calendar" />
 
-            <div class="pt-12">
+            <div class="pt-10">
                 Production Order
             </div>
             <br>
             <div class="overflow-x-auto bg-base-200 pt-5 p-8 font-bold">
-                <table class="table">
+                <table class="table table-zebra">
                     <thead>
                         <tr>
                             <th class="text-left">Date</th>
@@ -24,7 +24,6 @@
                 </table>
             </div>
         </x-tab>
-            
         <x-tab name="create-tab" label="Create New" icon="o-sparkles">
             <div class="w-48">
                 <x-datepicker label="Date created" wire:model="listDate" icon="o-calendar" />
@@ -44,8 +43,9 @@
                     <x-button tooltip="Add Item" icon="o-plus" class=" mt-1 btn-outline text-blue-600 border-blue-600 hover:bg-blue-700  text-sm" wire:click="addItem"  />
                 </div>
             </div>
-
+            <div class="flex justify-start my-5 p-3">
+                <x-button label="Save" class="btn-primary text-sm" icon="m-plus-small" wire:click="save" />
+            </div>
         </x-tab>
-
     </x-tabs>
 </div>
