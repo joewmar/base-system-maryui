@@ -24,11 +24,11 @@ class WeeklyRequisitionCreate extends Component
           'addDate' => 'required|date',
           'no_of_working' => 'required|numeric|same',
           'inventories.*.material_id' => 'required',
-          'inventories.*.price_per_kg' => 'required|numeric',
+          'inventories.*.price_per_kilograms' => 'required|numeric',
           'inventories.*.inventory_cost' => 'required|numeric',
           'inventories.*.kilograms_per_bag' => 'required|numeric',
-          'inventories.*.kilograms_per_bag' => 'required|numeric',
           'inventories.*.standard_days' => 'nullable|numeric',
+          'inventories.*.deliveries_today' => 'nullable|numeric',
           
       ];
       protected $messages = [
@@ -69,19 +69,20 @@ class WeeklyRequisitionCreate extends Component
       public function add()
       {
           $this->validate();
-        foreach($this->inventories as $inventory){
-            WeeklyOrder::create([
-                'material_id' => $inventory['material_id'],
-                'price_per_kgs' => $inventory['price_per_kg'],
-                'inv_cost' => $inventory['inventory_cost'],
-                'kgs_per_bag' => $inventory['kilograms_per_bag'],
-                'standard_days' => $inventory['standard_days'],
-                'date' => $this->addDate
-,
-            ]);
-        }
+          foreach($this->inventories as $inventory){
+                WeeklyOrder::create([
+                    'material_id' => $inventory['material_id'],
+                    'price_per_kgs' => $inventory['price_per_kilograms'],
+                    'inv_cost' => $inventory['inventory_cost'],
+                    'kgs_per_bag' => $inventory['kilograms_per_bag'],
+                    'deliveries_today' => $inventory['deliveries_today'] ?? 0,
+                    'standard_days' => $inventory['standard_days'],
+                    'no_of_working'=>$this->no_of_working,
+                    'date' => $this->addDate
+                ]);
+          }
           session()->flash('success', 'New Inventory successfully added');          
-          $this->redirect(route('requisition.daily-inventory-order'));
+          $this->redirect(route('requisition.weekly-requisition-home'));
 
       }
     public function render()

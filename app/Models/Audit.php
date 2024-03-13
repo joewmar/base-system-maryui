@@ -12,8 +12,8 @@ class Audit extends Model
     protected $fillable = [
         'action',
         'table',
-        'farm_new',
-        'farm_old',
+        'old_value',
+        'new_value',
         'user_id',
     ];
 

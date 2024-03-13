@@ -36,23 +36,31 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @php $total_usage = 0; @endphp
                                 @foreach ($ingredentList as $ingredent)
                                     @if($ingredent->feedType->farm_id == $farm->id)
                                         <tr>
                                             <th>{{$ingredent->feedType->feed_type_name}}</th>
                                             <td>{{$ingredent->standard}}</td>
                                             <td>{{$ingredent->batch}}</td>
-                                            <td>{{$ingredent->totalBatch()}}</td>
+                                            <td>{{$ingredent->total_batch}}</td>
                                             <td>{{$ingredent->adjustment}}</td>
-                                            <td>{{$ingredent->usage()}}</td>
+                                            <td>{{$ingredent->usage}}</td>
                                         </tr>
+                                        @php $total_usage = $ingredent->totalUsage($farm->id); @endphp
                                     @endif
                                 @endforeach
+                                <tr><td colspan="6"><hr></td></tr>
+                                <tr>
+                                    <td colspan="6" class="text-end">
+                                        <h2 class="font-bold text-sm">Total Usage: {{$total_usage}}</h2>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
+
                 @endscope
-                
             </x-table>
         </x-tab>
         {{-- Create New Ingredients Tab --}}

@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('productions', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            $table->feed_type_id('feed_type_id')->unsigned()->nullable();
+            $table->bigInteger('feed_type_id')->unsigned()->nullable();
             $table->time('runtime_start');
             $table->time('runtime_end');
             $table->integer('tons_produced');
             $table->float('target_tons_hour')->default(0);
             $table->float('prod_target_tons')->default(0);
-            $table->bigInteger('qa_id')->unsigned()->nullable();
-            $table->bigInteger('dt_id')->unsigned()->nullable();
+            $table->bigInteger('quality_assurance_id')->unsigned()->nullable();
+            $table->bigInteger('downtime_id')->unsigned()->nullable();
             $table->time('downtime_start');
             $table->time('downtime_end');
             $table->float('total_hours_operated')->default(0);
