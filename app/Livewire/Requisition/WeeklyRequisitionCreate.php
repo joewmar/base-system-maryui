@@ -48,7 +48,7 @@ class WeeklyRequisitionCreate extends Component
       }
       public function removeItem(string $id)
       {
-            unset($this->inventories[decrypt($id)]);
+        unset($this->inventories[decrypt($id)]);
       }
       public function updatedMaterials()
       {
@@ -72,16 +72,16 @@ class WeeklyRequisitionCreate extends Component
         foreach($this->inventories as $inventory){
             WeeklyOrder::create([
                 'material_id' => $inventory['material_id'],
-                'price_per_kg' => $inventory['price_per_kg'],
-                'inventory_cost' => $inventory['inventory_cost'],
-                'kilograms_per_bag' => $inventory['kilograms_per_bag'],
+                'price_per_kgs' => $inventory['price_per_kg'],
+                'inv_cost' => $inventory['inventory_cost'],
+                'kgs_per_bag' => $inventory['kilograms_per_bag'],
                 'standard_days' => $inventory['standard_days'],
                 'date' => $this->addDate
 ,
             ]);
         }
           session()->flash('success', 'New Inventory successfully added');          
-          $this->redirect(route('requisition.daily-inventory-home'));
+          $this->redirect(route('requisition.daily-inventory-order'));
 
       }
     public function render()
