@@ -27,6 +27,7 @@ use App\Livewire\DeliveryManagement\ScheduleHome;
 use App\Http\Controllers\AuthenticationController;
 use App\Livewire\FarmInformation\FarmLocationHome;
 use App\Livewire\RawMaterials\MaterialStorageHome;
+use App\Livewire\ProductionManagement\PremixesHome;
 use App\Livewire\Requisition\WeeklyRequisitionEdit;
 use App\Livewire\Requisition\WeeklyRequisitionHome;
 use App\Livewire\RawMaterials\IngredientsStorageEdit;
@@ -104,6 +105,8 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 		// Production-Management
 		// route for production order
 		Route::get('/production-order', ProductionOrderHome::class)->name('production-order-home');
+		// route for premixes
+		Route::get('/premixes', PremixesHome::class)->name('premixes-home');
 	});
 	/**
 	 * YOUR CODE STARTS HERE
