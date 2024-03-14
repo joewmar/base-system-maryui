@@ -10,6 +10,7 @@ class Production extends Model
     use HasFactory;
 
     protected $fillable = [
+        'date',
         'feed_type_id',
         'runtime_start',
         'runtime_end',
@@ -25,4 +26,8 @@ class Production extends Model
         'remarks',
         'active_status',
     ];
+    public function feedType()
+    {
+        return $this->belongsTo(FeedType::class, 'feed_type_id');
+    }
 }

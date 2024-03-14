@@ -22,9 +22,9 @@ class PermissionHome extends Component
     public function mount()
     {
         $this->headers = [
-            ['key' => 'name', 'label' => 'Name' , 'class' => 'text-neutral'],
-            ['key' => 'email', 'label' => 'Email' , 'class' => 'text-neutral'],
-            ['key' => 'role', 'label' => 'Role' , 'class' => 'text-neutral'],
+            ['key' => 'name', 'label' => 'Name'  ],
+            ['key' => 'email', 'label' => 'Email'  ],
+            ['key' => 'role', 'label' => 'Role'  ],
         ];
     }
     public function render()

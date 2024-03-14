@@ -19,9 +19,9 @@ class IngredientsStorageHome extends Component
     public function mount()
     {
         $this->headers = [
-            ['key' => 'id', 'label' => '#', 'class' => 'text-neutral'],
-            ['key' => 'material_name', 'label' => 'Materials', 'class' => 'text-neutral'],
-            ['key' => 'category', 'label' => 'Category', 'class' => 'text-neutral'],
+            ['key' => 'id', 'label' => '#' ],
+            ['key' => 'material_name', 'label' => 'Materials' ],
+            ['key' => 'category', 'label' => 'Category' ],
         ];
     }
 

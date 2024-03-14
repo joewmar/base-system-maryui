@@ -63,8 +63,8 @@ class FarmHome extends Component
     public function mount()
     { 
         $this->headers = [
-            ['key' => 'id', 'label' => '#', 'class' => 'text-neutral'],
-            ['key' => 'farm_name', 'label' => 'Farm', 'class' => 'text-neutral'],
+            ['key' => 'id', 'label' => '#' ],
+            ['key' => 'farm_name', 'label' => 'Farm' ],
         ];
 
         

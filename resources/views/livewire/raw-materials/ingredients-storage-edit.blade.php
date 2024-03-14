@@ -19,7 +19,7 @@
         <x-tab name="table-tab" label="List" icon="o-list-bullet">
             <x-datepicker label="Date" wire:model.live="listDate" icon="o-calendar" :config="$config" />
             <x-process-dialog target="listDate" />
-            <x-table :headers="[['key' => 'farm_name', 'label' => 'Farm', 'class' => 'text-neutral']]" :rows="$farms" wire:model="expanded" expandable >
+            <x-table :headers="[['key' => 'farm_name', 'label' => 'Farm' ]]" :rows="$farms" wire:model="expanded" expandable >
                 {{-- Special `expansion` slot --}}
                 @scope('expansion', $farm, $ingredentList)
                     <div class="overflow-x-auto bg-base-200 p-8 font-bold">
@@ -77,16 +77,7 @@
                                 <x-select wire:model.live="ingredents.{{$ingridentkey}}.farm_id" label="Farm {{$loop->iteration}}" placeholder-value="" placeholder="Select Farm" :options="$farms" option-value="id" option-label="farm_name" inline />
                                 <div>
                                     {{-- Action Add Item and Delete  --}}
-                                    @if (count($ingredents) > 1)
-                                        <x-button tooltip="Remove Item" icon="s-trash"  class="mt-1 btn-outline text-red-500 border-red-600 hover:bg-red-500" wire:click="removeItem('{{encrypt($ingridentkey)}}')" />
-                                    @else
-                                        <x-button tooltip="Remove Item" icon="s-trash"  class="mt-1 btn-outline text-red-500 border-red-600 hover:bg-red-500" disabled />
-                                    @endif
-                                @if ($loop->last)
-                                        <x-button tooltip="Add Item" icon="o-plus" class="btn-outline text-blue-600 border-blue-600 hover:bg-blue-700  text-sm" wire:click="addItem"  />
-                                @else 
-                                    <x-button tooltip="Add Item" icon="o-plus" class="btn-outline text-blue-600 border-blue-600 hover:bg-blue-700  text-sm" disabled />
-                                @endif
+                                    @include('partials.action-input', ['items' => $ingredents, 'deleteID' => $ingridentkey])
                                 </div>
                             </div>
                             {{-- <hr class="col-span-5"> --}}
@@ -95,9 +86,6 @@
                                 <x-input type="number" label="Standard" inline wire:model.live="ingredents.{{$ingridentkey}}.feed_types.{{$feedkey}}.standard" />
                                 <x-input type="number" label="Batch" inline wire:model.live="ingredents.{{$ingridentkey}}.feed_types.{{$feedkey}}.batch"  />
                                 <x-input type="number" label="Adjustment" inline wire:model.live="ingredents.{{$ingridentkey}}.feed_types.{{$feedkey}}.adjusment" />
-                                {{-- <div class="flex justify-center pt-4">
-                                    <x-checkbox wire:model.live="ingredents.{{$ingridentkey}}.feed_types.{{$feedkey}}.enabled" />
-                                </div> --}}
                             @endforeach
 
                         </div >

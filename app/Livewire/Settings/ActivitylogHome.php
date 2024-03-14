@@ -19,9 +19,9 @@ class ActivitylogHome extends Component
         ]);
 
         $this->headers = [
-            ['key' => 'name', 'label' => 'Name' , 'class' => 'text-neutral'],
-            ['key' => 'username', 'label' => 'username', 'class' => 'text-neutral'],
-            ['key' => 'email', 'label' => 'email' , 'class' => 'text-neutral'],
+            ['key' => 'name', 'label' => 'Name'  ],
+            ['key' => 'username', 'label' => 'username' ],
+            ['key' => 'email', 'label' => 'email'  ],
         ];
     }
     public function render()

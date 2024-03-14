@@ -42,9 +42,9 @@ class FeedTypeHome extends Component
         $this->farms = Farm::where('active_status', 1)->get()->toArray();
         $this->feedTypes = FeedType::where('active_status', 1)->get();
         $this->headers = [
-            ['key' => 'id', 'label' => '#', 'class' => 'text-neutral'],
-            ['key' => 'feed_type_name', 'label' => 'Feed Type', 'class' => 'text-neutral'],
-            ['key' => 'farm.farm_name', 'label' => 'Farms', 'class' => 'text-neutral'],
+            ['key' => 'id', 'label' => '#' ],
+            ['key' => 'feed_type_name', 'label' => 'Feed Type' ],
+            ['key' => 'farm.farm_name', 'label' => 'Farms' ],
         ];
     }
     public function edit(string $id)

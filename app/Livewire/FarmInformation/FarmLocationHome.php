@@ -48,9 +48,9 @@ class FarmLocationHome extends Component
     { 
         $this->farms = Farm::where('active_status', 1)->get()->toArray();
         $this->headers = [
-            ['key' => 'id', 'label' => '#', 'class' => 'text-neutral'],
-            ['key' => 'farm.farm_name', 'label' => 'Farm', 'class' => 'text-neutral'],
-            ['key' => 'farm_location', 'label' => 'Farm Location', 'class' => 'text-neutral'],
+            ['key' => 'id', 'label' => '#' ],
+            ['key' => 'farm.farm_name', 'label' => 'Farm' ],
+            ['key' => 'farm_location', 'label' => 'Farm Location' ],
         ];    
     }
 

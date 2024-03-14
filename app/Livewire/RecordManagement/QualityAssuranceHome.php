@@ -38,9 +38,9 @@ class QualityAssuranceHome extends Component
     public function mount()
     {
         $this->headers = [
-            ['key' => 'id', 'label' => '#', 'class' => 'text-neutral'],
-            ['key' => 'description', 'label' => 'Description', 'class' => 'text-neutral'],
-            ['key' => 'code', 'label' => 'Code', 'class' => 'text-neutral'],
+            ['key' => 'id', 'label' => '#' ],
+            ['key' => 'description', 'label' => 'Description' ],
+            ['key' => 'code', 'label' => 'Code' ],
         ];
     }
 

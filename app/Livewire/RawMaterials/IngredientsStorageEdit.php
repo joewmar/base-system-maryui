@@ -7,12 +7,14 @@ use Livewire\Component;
 use App\Models\FeedType;
 use App\Models\Material;
 use App\Models\Ingredient;
+use App\Traits\BfcFunction;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Rule;
 
 class IngredientsStorageEdit extends Component
 {
 
+    use BfcFunction;
     public array $expanded = [];
 
     public $ingredientHeaders;
@@ -77,10 +79,10 @@ class IngredientsStorageEdit extends Component
         $this->ingredents = collect(['item1' => []]);
         $this->inv_date = date('Y-m-d');
         $this->ingredientHeaders = [
-            ['key' => 'feedType.feed_type_name', 'label' => 'Feed Type', 'class' => 'text-neutral'],
-            ['key' => 'standard', 'label' => 'Standard', 'class' => 'text-neutral'],
-            ['key' => 'batch', 'label' => 'Batch', 'class' => 'text-neutral'],
-            ['key' => 'adjustment', 'label' => 'Adjustment', 'class' => 'text-neutral'],
+            ['key' => 'feedType.feed_type_name', 'label' => 'Feed Type' ],
+            ['key' => 'standard', 'label' => 'Standard' ],
+            ['key' => 'batch', 'label' => 'Batch' ],
+            ['key' => 'adjustment', 'label' => 'Adjustment' ],
         ];
         $this->listDate = date('Y-m-d');
     }
@@ -107,14 +109,8 @@ class IngredientsStorageEdit extends Component
     }
     public function addItem()
     {
-        $lastIndex = 1;
-        while(true){
-            if(!in_array('item'.$lastIndex, $this->ingredents->keys()->toArray())){
-                $this->ingredents->put('item'.$lastIndex, []);
-                break;
-            }  
-            else $lastIndex ++;
-        }
+        $this->production->put($this->addItemKey($this->production, 'prod'), []);
+
     }
     public function render()
     {

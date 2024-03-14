@@ -38,9 +38,9 @@ class ElectricCostHome extends Component
     public function mount()
     {
         $this->headers = [
-            ['key' => 'id', 'label' => '#', 'class' => 'text-neutral'],
-            ['key' => 'date', 'label' => 'Month', 'class' => 'text-neutral'],
-            ['key' => 'electric_cost', 'label' => 'Electric Cost', 'class' => 'text-neutral'],
+            ['key' => 'id', 'label' => '#' ],
+            ['key' => 'date', 'label' => 'Month' ],
+            ['key' => 'electric_cost', 'label' => 'Electric Cost' ],
         ];
     }
 

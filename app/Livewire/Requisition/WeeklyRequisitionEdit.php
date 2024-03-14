@@ -23,20 +23,20 @@ class WeeklyRequisitionEdit extends Component
         $this->material = Material::findOrFail(decrypt($id));
         $this->listDate = date('Y-m-d');
         $this->headers = [
-            ['key' => 'price_per_kgs', 'label' => 'Price per kgs', 'class' => 'text-neutral'],
-            ['key' => 'inv_cost', 'label' => 'Inv. Cost', 'class' => 'text-neutral'],
-            ['key' => 'kgs_per_bag', 'label' => 'Kgs. per bag', 'class' => 'text-neutral'],
-            ['key' => 'begin_inv', 'label' => 'BEGIN INV. (Kilos)', 'class' => 'text-neutral'],
-            ['key' => 'deliveries_today', 'label' => 'Deliveries Today', 'class' => 'text-neutral'],
-            ['key' => 'deliveries_todate', 'label' => 'Deliveries Todate', 'class' => 'text-neutral'],
-            ['key' => 'usage_today', 'label' => 'Usage Today', 'class' => 'text-neutral'],
-            ['key' => 'usage_todate', 'label' => 'Usage Todate', 'class' => 'text-neutral'],
-            ['key' => 'end_inv', 'label' => 'END INV (Kilos)', 'class' => 'text-neutral'],
-            ['key' => 'end_inv_bags', 'label' => 'END INV (Bags)', 'class' => 'text-neutral'],
-            ['key' => 'no_of_working', 'label' => 'No. of working days', 'class' => 'text-neutral'],
-            ['key' => 'ave_usage_per_day', 'label' => 'Ave. usage  per day', 'class' => 'text-neutral'],
-            ['key' => 'standard_days', 'label' => 'Standard Days', 'class' => 'text-neutral'],
-            ['key' => 'no_days_stock', 'label' => 'no. of days stock', 'class' => 'text-neutral'],
+            ['key' => 'price_per_kgs', 'label' => 'Price per kgs' ],
+            ['key' => 'inv_cost', 'label' => 'Inv. Cost' ],
+            ['key' => 'kgs_per_bag', 'label' => 'Kgs. per bag' ],
+            ['key' => 'begin_inv', 'label' => 'BEGIN INV. (Kilos)' ],
+            ['key' => 'deliveries_today', 'label' => 'Deliveries Today' ],
+            ['key' => 'deliveries_todate', 'label' => 'Deliveries Todate' ],
+            ['key' => 'usage_today', 'label' => 'Usage Today' ],
+            ['key' => 'usage_todate', 'label' => 'Usage Todate' ],
+            ['key' => 'end_inv', 'label' => 'END INV (Kilos)' ],
+            ['key' => 'end_inv_bags', 'label' => 'END INV (Bags)' ],
+            ['key' => 'no_of_working', 'label' => 'No. of working days' ],
+            ['key' => 'ave_usage_per_day', 'label' => 'Ave. usage  per day' ],
+            ['key' => 'standard_days', 'label' => 'Standard Days' ],
+            ['key' => 'no_days_stock', 'label' => 'no. of days stock' ],
         ];
     }
     public function render()
