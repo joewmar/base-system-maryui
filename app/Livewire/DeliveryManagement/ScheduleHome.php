@@ -10,7 +10,7 @@ class ScheduleHome extends Component
     public function index(Request $request)
     {
         if($request->ajax()) {
-            $events = ScheduleHome::all(); // Fetch all events
+            $events = ScheduleHome::where('active_status', 1)->get(); // Fetch all events
             return response()->json($events);
         }
     }

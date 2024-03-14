@@ -64,7 +64,7 @@
             </x-table>
         </x-tab>
         {{-- Create New Ingredients Tab --}}
-        <x-tab name="create-tab" label="Create New" icon="o-sparkles">
+        <x-tab name="create-tab" label="Create New" icon="s-archive-box-arrow-down">
             {{-- Calendar-Date --}}
             <x-form>
                 <div class=" w-48">

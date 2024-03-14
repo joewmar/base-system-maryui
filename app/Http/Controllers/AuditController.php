@@ -25,7 +25,7 @@ class AuditController extends Controller
     public function trail(Request $request)
     {
         if($request->ajax()) {
-            $audits = Audit::all();
+            $audits = Audit::where('active_status', 1)->get();
  
             $data = collect();
             if($audits->count() > 0) {

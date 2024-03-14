@@ -34,9 +34,9 @@ class WeeklyRequisitionEdit extends Component
             ['key' => 'end_inv', 'label' => 'END INV (Kilos)', 'class' => 'text-neutral'],
             ['key' => 'end_inv_bags', 'label' => 'END INV (Bags)', 'class' => 'text-neutral'],
             ['key' => 'no_of_working', 'label' => 'No. of working days', 'class' => 'text-neutral'],
-            // ['key' => 'name', 'label' => 'Ave. usage  per day', 'class' => 'text-neutral'],
+            ['key' => 'ave_usage_per_day', 'label' => 'Ave. usage  per day', 'class' => 'text-neutral'],
             ['key' => 'standard_days', 'label' => 'Standard Days', 'class' => 'text-neutral'],
-            // ['key' => 'name', 'label' => 'no. of days stock', 'class' => 'text-neutral'],
+            ['key' => 'no_days_stock', 'label' => 'no. of days stock', 'class' => 'text-neutral'],
         ];
     }
     public function render()

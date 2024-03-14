@@ -18,15 +18,17 @@
     <x-datepicker label="Date" wire:model.live="listDate" icon="o-calendar" :config="$config" />
     <x-process-dialog target="listDate" />
     <div class="mt-5">
-        <x-table :headers="$headers" :rows="$orders" >
-            @scope('cell_inv_cost', $mat)
-                {{number_format($mat->inv_cost, 2)}}
-            @endscope
-            @scope('actions', $order)
-                <div class="flex justify-around w-full space-x-2">
-                    <x-button tooltip="Remove" icon="o-trash" class="bg-red-500 btn-sm" link="{{route('requisition.weekly-requisition-order', encrypt($order->id))}}" />
-                </div>
-            @endscope
+        <x-table :headers="$headers" :rows="$orders">
+            @if ($orders->count() > 0)
+                @scope('cell_inv_cost', $mat)
+                    {{number_format($mat->inv_cost, 2)}}
+                @endscope
+                @scope('actions', $order)
+                    <div class="flex justify-around w-full space-x-2">
+                        <x-button tooltip="Remove" icon="o-trash" class="bg-red-500 btn-sm" link="{{route('requisition.weekly-requisition-order', encrypt($order->id))}}" />
+                    </div>
+                @endscope
+            @endif
         </x-table>
     </div>
 

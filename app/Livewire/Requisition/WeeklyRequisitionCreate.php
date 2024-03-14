@@ -40,7 +40,7 @@ class WeeklyRequisitionCreate extends Component
       {
           $this->addDate = date('Y-m-d');
           $this->inventories = ['mat1' => []];
-          $this->materials = Material::all();
+          $this->materials = Material::where('active_status', 1)->get();
       }
       public function updated($propertyName)
       {

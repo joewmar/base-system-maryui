@@ -15,13 +15,16 @@ return new class extends Migration
             $table->id();
             $table->date('date');
             $table->bigInteger('feed_type_id')->unsigned()->nullable();
+            $table->foreign('feed_type_id')->references('id')->on('feed_types');
             $table->time('runtime_start');
             $table->time('runtime_end');
             $table->integer('tons_produced');
             $table->float('target_tons_hour')->default(0);
             $table->float('prod_target_tons')->default(0);
             $table->bigInteger('quality_assurance_id')->unsigned()->nullable();
+            $table->foreign('quality_assurance_id')->references('id')->on('quality_assurances');
             $table->bigInteger('downtime_id')->unsigned()->nullable();
+            $table->foreign('downtime_id')->references('id')->on('downtimes');
             $table->time('downtime_start');
             $table->time('downtime_end');
             $table->float('total_hours_operated')->default(0);

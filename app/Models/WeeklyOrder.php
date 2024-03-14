@@ -46,11 +46,12 @@ class WeeklyOrder extends Model
         $prev_usage_todate = 0;
         $prev = parent::whereDate('date', date('Y-m-d', strtotime('-1 day', strtotime($this->attributes['date']))))->where('material_id', $this->attributes['material_id'])->where('active_status', '1')->first();
         if ($prev) $prev_usage_todate = $prev->deliveries_todate;
-        $del_today = $this->attributes['deliveries_today'];
+        $usage_today = $this->usage_today;
         return Attribute::make(
-            get: fn () => $del_today + $prev_usage_todate,
+            get: fn () => $usage_today + $prev_usage_todate,
         );
     }
+    // Crarify first on feedmill manager the computation okieeee
     protected function beginInv(): Attribute
     {
         $prev_end_inv = 0;
@@ -64,17 +65,33 @@ class WeeklyOrder extends Model
     {
         $begin_inv = $this->attributes['price_per_kgs'] ?? 0;
         $del_today = $this->attributes['deliveries_today'] ?? 0;
-        $usage_today = $this->attributes['usage_today'] ?? 0;
+        $usage_today = $this->usage_today ?? 0;
         return Attribute::make(
-            get: fn () => $begin_inv + $del_today + $usage_today,
+            get: fn () => $begin_inv + $del_today - $usage_today,
         );
     }
     protected function endInvBags(): Attribute
     {
-        $price_per_kgs = $this->attributes['price_per_kgs'] ?? 0;
-        $end_inv = $this->attributes['end_inv'] ?? 0;
+        $price_per_kgs = $this->price_per_kgs ?? 0;
+        $end_inv = $this->end_inv ?? 0;
         return Attribute::make(
             get: fn () => ($end_inv / $price_per_kgs) ?? 0,
+        );
+    }
+    protected function aveUsagePerDay(): Attribute
+    {
+        $usage_todate = $this->usage_todate ?? 0;
+        $no_of_working = $this->attributes['no_of_working'] ?? 0;
+        return Attribute::make(
+            get: fn () => ($usage_todate / $no_of_working) ?? 0,
+        );
+    }
+    protected function noDaysStock(): Attribute
+    {
+        $end_inv = $this->end_inv?? 0;
+        $ave_usage_per_day = $this->ave_usage_per_day ?? 0;
+        return Attribute::make(
+            get: fn () => ($end_inv / $ave_usage_per_day) ?? 0,
         );
     }
     // Relationships

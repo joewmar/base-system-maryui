@@ -22,6 +22,13 @@ class FeedType extends Model
             set: fn (string $value) => $value,        
         );
     }
+    protected function feedTypeFarm(): Attribute
+    {
+        $val = $this->attributes['feed_type_name'] .' - '. $this->farm->farm_name;
+        return Attribute::make(
+            get: fn () => strtoupper($val),
+        );
+    }
     public function farm()
     {
         return $this->belongsTo(Farm::class, 'farm_id');
