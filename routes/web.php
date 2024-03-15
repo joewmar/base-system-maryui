@@ -34,6 +34,7 @@ use App\Livewire\RawMaterials\IngredientsStorageEdit;
 use App\Livewire\RawMaterials\IngredientsStorageHome;
 use App\Livewire\Requisition\WeeklyRequisitionCreate;
 use App\Livewire\RecordManagement\QualityAssuranceHome;
+use App\Livewire\ProductionManagement\ProductionOrderEdit;
 use App\Livewire\ProductionManagement\ProductionOrderHome;
 
 // Fixed Route for all new application that will use Auth
@@ -105,6 +106,8 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 		// Production-Management
 		// route for production order
 		Route::get('/production-order', ProductionOrderHome::class)->name('production-order-home');
+		//route for edit/update production order
+		Route::get('/production-order/{id}/edit', ProductionOrderEdit::class)->name('production-order-edit');
 		// route for premixes
 		Route::get('/premixes', PremixesHome::class)->name('premixes-home');
 	});
