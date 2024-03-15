@@ -30,6 +30,10 @@ class Material extends Model
         );
     }
 
+    public function ingredients()
+    {
+        return $this->hasMany(Ingredient::class, 'material_id');
+    }
     public function orders()
     {
         return $this->hasMany(WeeklyOrder::class, 'material_id');

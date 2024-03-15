@@ -16,6 +16,8 @@ return new class extends Migration
             $table->bigInteger('feed_type_id')->unsigned()->nullable();
             $table->foreign('feed_type_id')->references('id')->on('feed_types');
             $table->float('beginning')->default(0);
+            $table->float('ending')->default(0);
+            $table->date('date');
             $table->boolean('active_status')->default(1);
             $table->timestamps();
         });

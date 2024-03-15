@@ -73,6 +73,10 @@ class ProductionOrderHome extends Component
     {
         $this->production->put($this->addItemKey($this->production, 'prod'), []);
     }
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
     #[On('add')]
     public function add()
     {

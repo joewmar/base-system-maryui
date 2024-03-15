@@ -14,7 +14,7 @@
     </div>
     <x-tabs selected="table-tab">
         <x-tab name="table-tab" label="List" icon="o-list-bullet">
-            <x-datepicker inline label="Date" wire:model="listDate" icon="o-calendar" />
+            <x-datepicker inline label="Date" wire:model.live="listDate" icon="o-calendar" />
             <x-table :headers="$headers" :rows="$listProd" >
                 @if ($listProd->count() > 0)
                     @scope('actions', $order)
