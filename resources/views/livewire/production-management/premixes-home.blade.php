@@ -10,9 +10,6 @@
     $configDate = ['dateFormat' => 'Y-m-d', 'altFormat' => 'F j, Y', 'altInput' => true];
 @endphp
 <div class="h-fit m-5">
-    <div class="pt-12 w-full h-full flex flex-col space-y-10 justify-center items-start">
-        <x-button icon="o-arrow-left" class="btn-circle btn-ghost" link="{{route('production-management.premixes-home')}}"  />
-    </div>
     <div class="p-4 text-center font-bold text-3xl">
         <h3>Premixes</h3>
     </div>

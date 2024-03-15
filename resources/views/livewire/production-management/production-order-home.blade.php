@@ -19,7 +19,7 @@
                 @if ($listProd->count() > 0)
                     @scope('actions', $order)
                         <div class="flex justify-around w-full space-x-2">
-                            <x-button icon="o-pencil-square" tooltip="Edit" class="bg-green-500 btn-sm" />
+                            <x-button icon="o-pencil-square" tooltip="Edit" class="bg-green-500 btn-sm" link="{{route('production-management.production-order-edit', encrypt($order->id))}}" />
                             <x-button icon="o-trash" tooltip="Remove" class="bg-red-500 btn-sm" onclick="deleteModal('{{encrypt($order->id)}}', '{{$order->date}}')" />
                         </div>
                     @endscope
@@ -58,9 +58,8 @@
                     @endforeach
                 </div>
                 <x-textarea wire:model.live="remarks" placeholder="Remarks" rows="3" />
-
                 <div class="flex justify-start my-5 p-3">
-                    <x-button label="Save" class="btn-primary text-sm" icon="m-plus-small" onclick="createModal('add', 'Do you want add this production order', 'add')" />
+                    <x-button label="Add" class="btn-primary text-sm" icon="m-plus-small" onclick="createModal('add', 'Do you want add this production order', 'add')" />
                 </div>
             </x-form>
         </x-tab>
