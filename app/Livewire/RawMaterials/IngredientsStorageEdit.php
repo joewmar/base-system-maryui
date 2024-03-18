@@ -19,8 +19,9 @@ class IngredientsStorageEdit extends Component
 
     public $ingredientHeaders;
 
+    public bool $haveRecord = false;
     public $material;
-    public $inv_date;
+    public $invDate;
 
     public $ingredents;
     public $farmHeaders;
@@ -36,34 +37,29 @@ class IngredientsStorageEdit extends Component
         'ingredents.*.feed_types.*.standard' => 'numeric',
         'ingredents.*.feed_types.*.batch' => 'numeric',
         'ingredents.*.feed_types.*.adjusment' => 'numeric',
-        'inv_date' => 'required',
+        'invDate' => 'required',
     ];
     protected $messages = [
         'ingredents.*.farm_id.required' => 'The Farm is required',
         'numeric' => 'This value must be a number',
-        'inv_date' => 'Date is required',
+        'invDate' => 'Date is required',
     ];
 
     #[On('save')]
     public function save()
     {
         $this->validate();
-        // dd($this->ingredents);
+        dd($this->ingredents);
         foreach ($this->ingredents as $key => $item) {
             foreach ($item['feed_types'] as $feed) {
-                Ingredient::updateOrCreate(
-                    [
-                        'material_id' => $this->material->id, 
-                        'feed_type_id' => decrypt($feed['id']),
-                        'date' => $this->inv_date,
-                    ],
+                Ingredient::create(
                     [
                         'material_id' => $this->material->id,
                         'feed_type_id' => decrypt($feed['id']),
                         'standard' => $feed['standard'] ?? 0,
                         'batch' => $feed['batch'] ?? 0,
                         'adjustment' => $feed['adjustment'] ?? 0,
-                        'date' => $this->inv_date,
+                        'date' => $this->invDate,
                     ]
                 );       
             }
@@ -71,13 +67,18 @@ class IngredientsStorageEdit extends Component
         session()->flash('success', 'Ingredients Stored Successfully');
         $this->redirect(route('raw-materials.ingredients-storage.edit', encrypt($this->material->id)));
     }
-
+    public function updatedListDate()
+    {
+        $materials = Ingredient::where('material_id', $this->material->id)->whereDate('date', $this->listDate)->where('active_status', 1)->get();
+        if(!$materials->isEmpty()) $this->haveRecord = true;
+        else $this->haveRecord = false;    
+    }
     public function mount(string $id)
     {
         $this->material = Material::findOrfail(decrypt($id));
         $this->farms = Farm::where('active_status', 1)->get();
         $this->ingredents = collect(['item1' => []]);
-        $this->inv_date = date('Y-m-d');
+        $this->invDate = date('Y-m-d');
         $this->ingredientHeaders = [
             ['key' => 'feedType.feed_type_name', 'label' => 'Feed Type' ],
             ['key' => 'standard', 'label' => 'Standard' ],
@@ -85,6 +86,8 @@ class IngredientsStorageEdit extends Component
             ['key' => 'adjustment', 'label' => 'Adjustment' ],
         ];
         $this->listDate = date('Y-m-d');
+        $this->updatedListDate();
+
     }
     public function updatedIngredents()
     {
@@ -109,8 +112,7 @@ class IngredientsStorageEdit extends Component
     }
     public function addItem()
     {
-        $this->production->put($this->addItemKey($this->production, 'prod'), []);
-
+        $this->ingredents->put($this->addItemKey($this->ingredents, 'item'), []);
     }
     public function render()
     {

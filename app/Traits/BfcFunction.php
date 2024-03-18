@@ -24,6 +24,7 @@ trait BfcFunction {
         $collects = $collects->map(function (array $item, string $key) {
             if(isset($item['farm_id']) && !empty($item['farm_id'])) {
                 $farm = Farm::find($item['farm_id']);
+                // unset($item['feed_types']);
                 foreach($farm->feedTypes ?? [] as $key => $feedType){
                     $item['feed_types']['ft'.$key+1]['id'] = encrypt($feedType->id);
                     $item['feed_types']['ft'.$key+1]['name'] = $feedType->feed_type_name;

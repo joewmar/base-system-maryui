@@ -25,6 +25,7 @@ use App\Livewire\RecordManagement\DowntimeHome;
 use App\Livewire\RecordManagement\FeedTypeHome;
 use App\Livewire\DeliveryManagement\ScheduleHome;
 use App\Http\Controllers\AuthenticationController;
+use App\Http\Controllers\GeneralController;
 use App\Livewire\FarmInformation\FarmLocationHome;
 use App\Livewire\RawMaterials\MaterialStorageHome;
 use App\Livewire\ProductionManagement\PremixesHome;
@@ -36,6 +37,7 @@ use App\Livewire\Requisition\WeeklyRequisitionCreate;
 use App\Livewire\RecordManagement\QualityAssuranceHome;
 use App\Livewire\ProductionManagement\ProductionOrderEdit;
 use App\Livewire\ProductionManagement\ProductionOrderHome;
+use App\Livewire\RawMaterials\IngredientsStorageEditInv;
 
 // Fixed Route for all new application that will use Auth
 Route::get('/app-login/{id}', [AuthenticationController::class, 'app_login'])->name('app.login');
@@ -66,12 +68,13 @@ Route::get('/login', [LoginController::class, 'login'])->name('login');
 		Route::get('/permission/{id}', PermissionEdit::class)->name('permission.edit');
 	
 	});
-	Route::prefix('/raw-materials')->name('raw-materials.')->group(function(){
+	Route::prefix('/raw-materials')->name('raw-materials.')->controller(GeneralController::class)->group(function(){
 		// Raw-Materials
 		// Route for Ingredients Storage
 		Route::prefix('/ingredients-storage')->name('ingredients-storage.')->group(function (){
 			Route::get('/', IngredientsStorageHome::class)->name('home');
 			Route::get('/{id}/edit', IngredientsStorageEdit::class)->name('edit');
+			Route::get('/{id}/edit/{date}', IngredientsStorageEditInv::class)->name('edit.inventory');
 		});
 		// For Material Storage
 		Route::get('material-storage', MaterialStorageHome::class)->name('material-storage-home');
